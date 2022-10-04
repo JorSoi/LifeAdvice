@@ -1,0 +1,34 @@
+#categoriesComponent {
+    width: 100%;
+    /* display: none; */
+}
+
+.category {
+    cursor: pointer;
+    padding: 15px;
+    font-weight: 600;
+    font-size: 17px;
+    white-space: nowrap;
+}
+
+.category:hover {
+    background-color: rgba(227, 227, 227, 0.503);
+}
+
+#default {
+    background-color: rgb(253, 224, 188);
+}
+
+
+@media (max-width: 768px) {
+    #categoriesComponent {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 425px) {
+    #categoriesComponent {
+        display: none;
+    }
+}

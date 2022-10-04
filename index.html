@@ -6,9 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lifelessons</title>
     <script src="app.js" defer></script>
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="./styles/global.css" rel="stylesheet" type="text/css"/>
+    <link href="./styles/categoriesComponent.css" rel="stylesheet" type="text/css"/>
+    <link href="./styles/lessonsComponent.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    
+    <div id="sidebar">
+        <h2 class="logo">Lifelessons</h2>
+        <p class="copyright">Jorim Soika ©2022</p>
+        <div id="categoriesComponent">
+            <p class="category" id="default">🎲 Random</p>
+        </div>
+        <div id="hamburgerMenu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="contentBody">
+        <div class="lessonsComponent">
+            <img id="left-arrow" class="desktop"src="assets/arrow.svg"/>
+            <div class="lesson">
+                <p class="author">Lesson learned by <span>jorsoi_13</span></p>
+                <h2>"Every person has a reason for doing what they are doing. It’s not just completely senseless behavior like we would assume just because we can’t imagine ourselves into the heads of these peoples."
+                </h2>
+                
+                <div class="voting-wrapper">
+                    <button>👍🏼</button>
+                    <button>👎🏼</button>
+                </div>
+            </div>
+            <img id="right-arrow" class="desktop"src="assets/arrow.svg"/>
+
+
+            <button id="createLessonButton" class="desktop">Add your own life lesson!</button>
+        </div>
+        <div class="mobileButtonWrapper">
+            <img id="left-arrow" class="mobile" src="assets/arrow.svg"/>
+            <button id="createLessonButton" class="mobile">Add your own life lesson!</button>
+            <img id="right-arrow" class="mobile" src="assets/arrow.svg"/>
+        </div>
+
+    </div>
 </body>
 </html>
