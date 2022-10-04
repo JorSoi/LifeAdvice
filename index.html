@@ -15,7 +15,7 @@
         <h2 class="logo">Lifelessons</h2>
         <p class="copyright">Jorim Soika ©2022</p>
         <div id="categoriesComponent">
-            <p class="category" id="default">🎲 Random</p>
+            <p class="category" id="default">🎲 Random Lesson</p>
         </div>
         <div id="hamburgerMenu">
             <div></div>
@@ -27,16 +27,10 @@
         <div class="lessonsComponent">
             <img id="left-arrow" class="desktop"src="assets/arrow.svg"/>
             <div class="lesson">
-                <p class="author">Lesson learned by <span>jorsoi_13</span></p>
-                <h2>"Every person has a reason for doing what they are doing. It’s not just completely senseless behavior like we would assume just because we can’t imagine ourselves into the heads of these peoples."
-                </h2>
                 
-                <div class="voting-wrapper">
-                    <button>👍🏼</button>
-                    <button>👎🏼</button>
-                </div>
+                <!-- Lesson will be displayed here  -->
             </div>
-            <img id="right-arrow" class="desktop"src="assets/arrow.svg"/>
+            <img id="right-arrow" class="desktop" onclick="getRandomLesson()" src="assets/arrow.svg"/>
 
 
             <button id="createLessonButton" class="desktop">Add your own life lesson!</button>
@@ -44,7 +38,7 @@
         <div class="mobileButtonWrapper">
             <img id="left-arrow" class="mobile" src="assets/arrow.svg"/>
             <button id="createLessonButton" class="mobile">Add your own life lesson!</button>
-            <img id="right-arrow" class="mobile" src="assets/arrow.svg"/>
+            <img id="right-arrow" class="mobile" onclick="getRandomLesson()" src="assets/arrow.svg"/>
         </div>
 
     </div>

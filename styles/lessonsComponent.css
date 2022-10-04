@@ -37,13 +37,15 @@
     margin-top: 20px;
 }
 
-.lesson button {
-    width: 50px;
+#upvoteBtn,
+#downvoteBtn {
     height: 50px;
     margin: 5px;
+    padding: 0 5px;
     border-radius: 5px;
     cursor: pointer; 
     font-size: 25px;
+    border: none;
 }
 
 
@@ -67,6 +69,10 @@
     padding: 15px;
     font-weight: 600;
     cursor: pointer;
+}
+
+#createLessonButton.mobile {
+    display: none;
 }
 
 @media (max-width: 1020px) {
