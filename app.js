@@ -4,6 +4,7 @@ const downvoteBtn = document.getElementById('downvoteBtn');
 const leftArrow = document.getElementById('left-arrow');
 
 let upvoteMemory = [];
+let downvoteMemory = [];
 let lessonMemory = [];
 
 const getAllCategories = async () => {
@@ -40,12 +41,7 @@ const getRandomLesson = async () => {
                 <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 <span> ${randomLesson.upvotes}</span></button>
                 <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 <span> ${randomLesson.downvotes}</span></button>
             </div>`
-            upvoteMemory.forEach((value) => {
-                if(randomLesson.id === value) {
-                    document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";
-                    
-                }
-            })
+            getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
             leftArrowFunctionality();
         } else {
@@ -73,12 +69,7 @@ const clickPreviousLesson = async () => {
                     <button id="downvoteBtn" onclick="downvote(${data[0].id})">👎🏼 <span> ${data[0].downvotes}</span></button>
                 </div>`
             }
-            upvoteMemory.forEach((value) => {
-                if(data[0].id === value) {
-                    document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";
-                    
-                }
-            })
+            getVotingBtnColors(data[0].id);
             lessonMemory.pop();
             leftArrowFunctionality();
         } 
@@ -97,10 +88,13 @@ const upvote = async (lesson_id) => {
         const getResponse = await fetch(`http://localhost:3000/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
-            let isLiked = upvoteMemory.some((value) => {
+            let liked = upvoteMemory.some((value) => {
                 return getData[0].id == value;
             })
-            if (!isLiked) {
+            let disliked = downvoteMemory.some((value) => {
+                return getData[0].id == value;
+            })
+            if (!liked && !disliked) {
                 const putResponse = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
                         method: "PUT"
                     });
@@ -119,7 +113,36 @@ const upvote = async (lesson_id) => {
     }
 }
 
+const downvote = async (lesson_id) => {
 
+    try {
+        const getResponse = await fetch(`http://localhost:3000/lessons/${lesson_id}`);
+        if (getResponse.ok) {
+            const getData = await getResponse.json();
+            let liked = upvoteMemory.some((value) => {
+                return getData[0].id == value;
+            })
+            let disliked = downvoteMemory.some((value) => {
+                return getData[0].id == value;
+            })
+            if (!disliked & !liked) {
+                const putResponse = await fetch(`http://localhost:3000/lessons/downvote/${lesson_id}`, {
+                        method: "PUT"
+                    });
+                if (putResponse.ok) {
+                    const putData = await putResponse.json();
+                    document.getElementById('downvoteBtn').innerHTML = `👎🏼 <span>${putData[0].downvotes}</span>`;
+                    document.getElementById('downvoteBtn').style.backgroundColor = 'rgba(251, 34, 1, 0.463)';
+                    downvoteMemory.push(putData[0].id);
+
+                }
+            }
+        }
+        
+    } catch (err) {
+        console.log(`Code Error: ${err}`);
+    }
+}
         
 
         
@@ -179,3 +202,17 @@ const leftArrowFunctionality = () => {
         leftArrow.style.opacity = '20%';
     }
 }
+
+const getVotingBtnColors = (lesson_id) => {
+    upvoteMemory.forEach((value) => {
+        if(lesson_id === value) {
+            document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";  
+        }
+    })
+    downvoteMemory.forEach((value) => {
+        if(lesson_id === value) {
+            document.getElementById('downvoteBtn').style.backgroundColor = "rgba(251, 34, 1, 0.463)";
+        }
+    })
+}
+

@@ -47,8 +47,8 @@ app.put('/lessons/upvote/:lesson_id', async (req, res) => {
 })
 
 app.put('/lessons/downvote/:lesson_id', async (req, res) => {
-    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes - 1 WHERE id = $1", [req.params.lesson_id]);
-    const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    const db_updt = await pool.query("UPDATE lessons SET downvotes = downvotes + 1 WHERE id = $1", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT id, downvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
     res.send(db_res.rows);
     
 })
