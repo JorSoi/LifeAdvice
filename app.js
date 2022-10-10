@@ -1,14 +1,16 @@
 const categoriesComponent = document.getElementById('categoriesComponent');
 const lesson = document.querySelector('.lesson');
-
 const downvoteBtn = document.getElementById('downvoteBtn');
+const leftArrow = document.getElementById('left-arrow');
+
+let upvoteMemory = [];
+let lessonMemory = [];
 
 const getAllCategories = async () => {
     try {
         const response = await fetch('http://localhost:3000/categories');
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             data.forEach((value) => {
                 categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="getCategoryLessons(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
             })
@@ -35,9 +37,17 @@ const getRandomLesson = async () => {
             <h2>"${randomLesson.lesson}"</h2>
             
             <div class="voting-wrapper">
-                <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 ${randomLesson.upvotes}</button>
-                <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 ${randomLesson.downvotes}</button>
+                <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 <span> ${randomLesson.upvotes}</span></button>
+                <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 <span> ${randomLesson.downvotes}</span></button>
             </div>`
+            upvoteMemory.forEach((value) => {
+                if(randomLesson.id === value) {
+                    document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";
+                    
+                }
+            })
+            lessonMemory.push(randomLesson.id);
+            leftArrowFunctionality();
         } else {
             console.log('Response was not okay')
         }
@@ -48,31 +58,109 @@ const getRandomLesson = async () => {
 
 
 
+const clickPreviousLesson = async () => {
+    try {
+        let data;
+        if (lessonMemory.length > 1) {
+            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2]}`);
+            if (response.ok) {
+                data = await response.json();
+                lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
+                <h2>"${data[0].lesson}"</h2>
+                
+                <div class="voting-wrapper">
+                    <button id="upvoteBtn" onclick="upvote(${data[0].id})">👍🏼 <span> ${data[0].upvotes}</span></button>
+                    <button id="downvoteBtn" onclick="downvote(${data[0].id})">👎🏼 <span> ${data[0].downvotes}</span></button>
+                </div>`
+            }
+            upvoteMemory.forEach((value) => {
+                if(data[0].id === value) {
+                    document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";
+                    
+                }
+            })
+            lessonMemory.pop();
+            leftArrowFunctionality();
+        } 
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+
 
 
 const upvote = async (lesson_id) => {
     
     try {
-        document.getElementById('upvoteBtn').style.backgroundColor = "rgba(12, 178, 12, 0.458)";
+        const getResponse = await fetch(`http://localhost:3000/lessons/${lesson_id}`);
+        if (getResponse.ok) {
+            const getData = await getResponse.json();
+            let isLiked = upvoteMemory.some((value) => {
+                return getData[0].id == value;
+            })
+            if (!isLiked) {
+                const putResponse = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
+                        method: "PUT"
+                    });
+                if (putResponse.ok) {
+                    const putData = await putResponse.json();
+                    document.getElementById('upvoteBtn').innerHTML = `👍🏼 <span>${putData[0].upvotes}</span>`;
+                    document.getElementById('upvoteBtn').style.backgroundColor = 'rgba(12, 178, 12, 0.458)';
+                    upvoteMemory.push(putData[0].id);
 
-
-        const response = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
-            method: "PUT"
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            document.getElementById('upvoteBtn').innerHTML = `👍🏼 ${data[0].upvotes}`;
-        } else {
-            console.log('not ok')
+                }
+            }
         }
         
-
-
     } catch (err) {
         console.log(`Code Error: ${err}`);
     }
 }
+
+
+        
+
+        
+
+
+
+
+        // document.getElementById('upvoteBtn').innerHTML = `👍🏼 <span>${data[0].upvotes}</span>`;
+        // document.getElementById('upvoteBtn').style.backgroundColor = 'green';
+        // upvoteMemory.push(data[0].id);
+        // const response = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
+        //     method: "PUT"
+        // });
+        // if (response.ok) {
+        //     const data = await response.json();
+            
+        //         upvoteMemory.forEach((value) => {
+        //             if(data[0].id !== value) {
+                        
+        //             }
+        //         })
+            
+            // upvoteMemory.forEach((value) => {
+            //     console.log(value);
+            //     if (value == data[0].id) {
+
+            //     } else {
+            //         console.log('hello')
+            //         document.getElementById('upvoteBtn').innerHTML = `👍🏼 <span>${data[0].upvotes}</span>`;
+            //         document.getElementById('upvoteBtn').style.backgroundColor = 'green';
+            //         upvoteMemory.push(data[0].id);
+            //     }
+            // })
+
+        // } else {
+        //     console.log('not ok')
+        // }
+        
+
+
+
 
 
 const initWebApp = () => {
@@ -82,3 +170,12 @@ const initWebApp = () => {
 
 initWebApp();
 
+const leftArrowFunctionality = () => {
+    if(lessonMemory.length > 1) {
+        leftArrow.style.cursor = 'pointer';
+        leftArrow.style.opacity = '100%';
+    } else {
+        leftArrow.style.cursor = 'auto';
+        leftArrow.style.opacity = '20%';
+    }
+}

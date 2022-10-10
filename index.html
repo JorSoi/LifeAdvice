@@ -25,7 +25,7 @@
     </div>
     <div id="contentBody">
         <div class="lessonsComponent">
-            <img id="left-arrow" class="desktop"src="assets/arrow.svg"/>
+            <img id="left-arrow" class="desktop" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>
             <div class="lesson">
                 
                 <!-- Lesson will be displayed here  -->
@@ -36,7 +36,7 @@
             <button id="createLessonButton" class="desktop">Add your own life lesson!</button>
         </div>
         <div class="mobileButtonWrapper">
-            <img id="left-arrow" class="mobile" src="assets/arrow.svg"/>
+            <img id="left-arrow" class="mobile" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>
             <button id="createLessonButton" class="mobile">Add your own life lesson!</button>
             <img id="right-arrow" class="mobile" onclick="getRandomLesson()" src="assets/arrow.svg"/>
         </div>

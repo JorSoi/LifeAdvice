@@ -4,12 +4,14 @@ const PORT = process.env.port || 3000;
 const pool = require('./db.js');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 
 
 //Middleware
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('tiny'));
 
 
 
@@ -33,9 +35,20 @@ app.get('/lessons', async (req, res) => {
     }
 });
 
+app.get('/lessons/:lesson_id', async (req, res) => {
+    const db_res = await pool.query("SELECT * FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    res.status(200).send(db_res.rows);
+})
+
 app.put('/lessons/upvote/:lesson_id', async (req, res) => {
     const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes + 1 WHERE id = $1", [req.params.lesson_id]);
-    const db_res = await pool.query("SELECT upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    res.send(db_res.rows);
+})
+
+app.put('/lessons/downvote/:lesson_id', async (req, res) => {
+    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes - 1 WHERE id = $1", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
     res.send(db_res.rows);
     
 })
