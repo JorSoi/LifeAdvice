@@ -49,7 +49,6 @@ const getRandomLesson = async (category) => {
             getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
             leftArrowFunctionality();
-            highlightCategory();
         } else {
             console.log('Response was not okay')
         }
@@ -191,8 +190,11 @@ const openCategory = (categoryId) => {
     currentCategoryId = categoryId;
     lessonMemory = [];
     highlightCategory();
-    getCategoryLesson(currentCategoryId);
-    
+    if (currentCategoryId === 0) {
+        getRandomLesson();
+    } else {
+        getCategoryLesson(currentCategoryId);
+    }
 }
 
 
@@ -225,12 +227,7 @@ const getCategoryLesson = async (categoryId) => {
 
 
 
-const initWebApp = () => {
-    getAllCategories();
-    getRandomLesson();
-}
 
-initWebApp();
 
 const leftArrowFunctionality = () => {
     if(lessonMemory.length > 1) {
@@ -262,3 +259,11 @@ const highlightCategory = () => {
     })
     document.getElementById(`category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
 }
+
+const initWebApp = () => {
+    getAllCategories();
+    getRandomLesson();
+    highlightCategory();
+}
+
+initWebApp();
