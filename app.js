@@ -6,7 +6,7 @@ const leftArrow = document.getElementById('left-arrow');
 let upvoteMemory = [];
 let downvoteMemory = [];
 let lessonMemory = [];
-let currentCategory = 0; // 0 is default (show random lesson). Afterwards it orients by categoryId
+let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it orients by categoryId
 
 const getAllCategories = async () => {
     try {
@@ -14,7 +14,7 @@ const getAllCategories = async () => {
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
-                categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="getCategoryLesson(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
+                categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
             })
         } else {
             console.log('Response was not okay')
@@ -34,7 +34,7 @@ const getRandLesson = (dataArray) => {
 const getRandomLesson = async (category) => {
     try {
         let randomLesson;
-        currentCategory = 0;
+        currentCategoryId = 0;
         const response = await fetch('http://localhost:3000/lessons');
         if (response.ok) {
             const data = await response.json();
@@ -49,6 +49,7 @@ const getRandomLesson = async (category) => {
             getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
             leftArrowFunctionality();
+            highlightCategory();
         } else {
             console.log('Response was not okay')
         }
@@ -60,10 +61,11 @@ const getRandomLesson = async (category) => {
 
 
 const clickPreviousLesson = async () => {
+    console.log(lessonMemory[lessonMemory.length - 2]);  
     try {
         let data;
         if (lessonMemory.length > 1) {
-            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2]}`);
+            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2].id}`);
             if (response.ok) {
                 data = await response.json();
                 lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
@@ -72,20 +74,20 @@ const clickPreviousLesson = async () => {
                 <div class="voting-wrapper">
                     <button id="upvoteBtn" onclick="upvote(${data[0].id})">👍🏼 <span> ${data[0].upvotes}</span></button>
                     <button id="downvoteBtn" onclick="downvote(${data[0].id})">👎🏼 <span> ${data[0].downvotes}</span></button>
-                </div>`
+                </div>` 
             }
             getVotingBtnColors(data[0].id);
             lessonMemory.pop();
             leftArrowFunctionality();
         } 
     } catch (err) {
-        console.log(err);
+        console.log(err);  
     }
 }
-
+ 
 const clickNextLesson = async () => {
 
-    switch(currentCategory) {
+    switch(currentCategoryId) {
         case 0:
             getRandomLesson();
             break;
@@ -185,14 +187,19 @@ const downvote = async (lesson_id) => {
         
 
         
-
+const openCategory = (categoryId) => {
+    currentCategoryId = categoryId;
+    lessonMemory = [];
+    highlightCategory();
+    getCategoryLesson(currentCategoryId);
+    
+}
 
 
 
 const getCategoryLesson = async (categoryId) => {
     try {
         let randomLesson;
-        currentCategory = categoryId;
         const response = await fetch(`http://localhost:3000/lessons/category/${categoryId}`);
         if (response.ok) {
             const data = await response.json();
@@ -206,8 +213,8 @@ const getCategoryLesson = async (categoryId) => {
                 </div>`
             }
         getVotingBtnColors(randomLesson.id);
+        lessonMemory.push(randomLesson)
         leftArrowFunctionality();
-
     } catch (err) {
         console.log(err);
     }
@@ -248,3 +255,10 @@ const getVotingBtnColors = (lesson_id) => {
     })
 }
 
+
+const highlightCategory = () => {
+    document.querySelectorAll('.category').forEach((classItem) => {
+        classItem.style.backgroundColor = 'unset'
+    })
+    document.getElementById(`category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
+}

@@ -33,11 +33,11 @@ app.get('/lessons', async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-});
+}); 
 
 app.get('/lessons/:lesson_id', async (req, res) => {
     const db_res = await pool.query("SELECT * FROM lessons WHERE id = $1", [req.params.lesson_id]);
-    res.status(200).send(db_res.rows);
+    res.status(200).send(db_res.rows); 
 })
 
 app.put('/lessons/upvote/:lesson_id', async (req, res) => {
