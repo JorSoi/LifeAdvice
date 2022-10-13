@@ -54,8 +54,9 @@ app.put('/lessons/downvote/:lesson_id', async (req, res) => {
 })
 
 
-app.get('/lessons/category/:categoryName', async (req, res) => {
-    //gets all lifelessons from the category listed as a request parameter 
+app.get('/lessons/category/:categoryId', async (req, res) => {
+    const db_res = await pool.query("SELECT * FROM lessons WHERE category_id = $1", [req.params.categoryId]);
+    res.status(200).send(db_res.rows); 
 });
 
 

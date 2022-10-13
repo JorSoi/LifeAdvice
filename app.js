@@ -6,6 +6,7 @@ const leftArrow = document.getElementById('left-arrow');
 let upvoteMemory = [];
 let downvoteMemory = [];
 let lessonMemory = [];
+let currentCategory = 0; // 0 is default (show random lesson). Afterwards it orients by categoryId
 
 const getAllCategories = async () => {
     try {
@@ -13,7 +14,7 @@ const getAllCategories = async () => {
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
-                categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="getCategoryLessons(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
+                categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="getCategoryLesson(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
             })
         } else {
             console.log('Response was not okay')
@@ -23,17 +24,21 @@ const getAllCategories = async () => {
     }
 }
 
+//Get Random Lesson Object out of the array from the resolved data promise.
+const getRandLesson = (dataArray) => {
+    let randomValue = Math.floor(Math.random()* (dataArray.length));
+    return dataArray[randomValue]
+}
 
 
-
-
-const getRandomLesson = async () => {
+const getRandomLesson = async (category) => {
     try {
+        let randomLesson;
+        currentCategory = 0;
         const response = await fetch('http://localhost:3000/lessons');
         if (response.ok) {
             const data = await response.json();
-            const randomInt = Math.floor(Math.random()* (data.length));
-            const randomLesson = data[randomInt];
+            randomLesson = getRandLesson(data);
             lesson.innerHTML = `<p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
             <h2>"${randomLesson.lesson}"</h2>
             
@@ -78,6 +83,40 @@ const clickPreviousLesson = async () => {
     }
 }
 
+const clickNextLesson = async () => {
+
+    switch(currentCategory) {
+        case 0:
+            getRandomLesson();
+            break;
+        case 1:
+            getCategoryLesson(1);
+            break;
+        case 2:
+            getCategoryLesson(2);
+            break;
+        case 3:
+            getCategoryLesson(3);
+            break;
+        case 4:
+            getCategoryLesson(4);
+            break;
+        case 5:
+            getCategoryLesson(5);
+            break;
+        case 6:
+            getCategoryLesson(6);
+            break;
+        case 7:
+            getCategoryLesson(7);
+            break;
+        case 8:
+            getCategoryLesson(8);
+            break;
+        default:
+            console.log('Category not found...')
+    }
+}
 
 
 
@@ -150,36 +189,29 @@ const downvote = async (lesson_id) => {
 
 
 
-        // document.getElementById('upvoteBtn').innerHTML = `👍🏼 <span>${data[0].upvotes}</span>`;
-        // document.getElementById('upvoteBtn').style.backgroundColor = 'green';
-        // upvoteMemory.push(data[0].id);
-        // const response = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
-        //     method: "PUT"
-        // });
-        // if (response.ok) {
-        //     const data = await response.json();
-            
-        //         upvoteMemory.forEach((value) => {
-        //             if(data[0].id !== value) {
-                        
-        //             }
-        //         })
-            
-            // upvoteMemory.forEach((value) => {
-            //     console.log(value);
-            //     if (value == data[0].id) {
+const getCategoryLesson = async (categoryId) => {
+    try {
+        let randomLesson;
+        currentCategory = categoryId;
+        const response = await fetch(`http://localhost:3000/lessons/category/${categoryId}`);
+        if (response.ok) {
+            const data = await response.json();
+            randomLesson = getRandLesson(data);
+            lesson.innerHTML = `<p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
+                <h2>"${randomLesson.lesson}"</h2>
+                
+                <div class="voting-wrapper">
+                    <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 <span> ${randomLesson.upvotes}</span></button>
+                    <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 <span> ${randomLesson.downvotes}</span></button>
+                </div>`
+            }
+        getVotingBtnColors(randomLesson.id);
+        leftArrowFunctionality();
 
-            //     } else {
-            //         console.log('hello')
-            //         document.getElementById('upvoteBtn').innerHTML = `👍🏼 <span>${data[0].upvotes}</span>`;
-            //         document.getElementById('upvoteBtn').style.backgroundColor = 'green';
-            //         upvoteMemory.push(data[0].id);
-            //     }
-            // })
-
-        // } else {
-        //     console.log('not ok')
-        // }
+    } catch (err) {
+        console.log(err);
+    }
+}
         
 
 
