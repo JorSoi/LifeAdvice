@@ -1,4 +1,5 @@
-const categoriesComponent = document.getElementById('categoriesComponent');
+const desktopCategoriesComponent = document.getElementById('categoriesComponent');
+const mobileCategoriesComponent = document.getElementById('mobileCategoryWrapper');
 const lesson = document.querySelector('.lesson');
 const downvoteBtn = document.getElementById('downvoteBtn');
 const leftArrow = document.getElementById('left-arrow');
@@ -14,7 +15,8 @@ const getAllCategories = async () => {
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
-                categoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
+                desktopCategoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
+                mobileCategoriesComponent.innerHTML += `<p id="category-${value.id}" class="category mobile" onclick="openCategory(${value.id}); closeNavbar()">${value.category_emoji + ' ' + value.category_name}</p>`;
             })
         } else {
             console.log('Response was not okay')

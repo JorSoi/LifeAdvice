@@ -7,6 +7,7 @@
 
 body {
     display: flex;
+    position: relative;
 }
 
 
@@ -42,7 +43,7 @@ body {
     position: absolute;
     top: 7px;
     right: 15px;
-    z-index: 1001;
+    z-index: 9999 !important;
     cursor: pointer;
     
 }

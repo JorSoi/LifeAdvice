@@ -6,23 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lifelessons</title>
     <script src="app.js" defer></script>
+    <script src="mobileNav.js" defer></script>
     <link href="./styles/global.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/categoriesComponent.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/lessonsComponent.css" rel="stylesheet" type="text/css"/>
+    <link href="./styles/mobileNav.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div id="sidebar">
+    <div id="hamburgerMenu" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav id="mobileNav">
+        <div id="mobileCategoryWrapper">
+            <p class="category mobile" id="category-0" onclick="openCategory(0); closeNavbar()">🎲 Random Lesson</p>
+        </div>
+    </nav>
+    <nav id="sidebar">
         <h2 class="logo">Lifelessons</h2>
         <p class="copyright">Jorim Soika ©2022</p>
         <div id="categoriesComponent">
             <p class="category" id="category-0" onclick="openCategory(0)">🎲 Random Lesson</p>
         </div>
-        <div id="hamburgerMenu">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+    </nav>
     <div id="contentBody">
         <div class="lessonsComponent">
             <img id="left-arrow" class="desktop" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>

@@ -1,0 +1,19 @@
+#mobileNav {
+    position: fixed;
+    bottom: 100vh;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9998;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 500ms;
+}
+
+.category.mobile {
+    text-align: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-radius: 5px;
+}
