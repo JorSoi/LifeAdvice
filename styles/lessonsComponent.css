@@ -4,13 +4,13 @@
     margin: 0 2%;
 }
 
-#left-arrow,
-#right-arrow {
+.left-arrow,
+.right-arrow {
     width: 100px;
     cursor: pointer;
 }
 
-#right-arrow {
+.right-arrow {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
@@ -60,9 +60,10 @@
     background-color: rgb(181, 181, 181);
 }
 
-#left-arrow.mobile,
-#right-arrow.mobile {
+.left-arrow.mobile,
+.right-arrow.mobile {
     display: none;
+    width: 70px;
 }
 
 #createLessonButton {
@@ -116,8 +117,8 @@
         margin: 0px;
     }
 
-    #left-arrow.desktop,
-    #right-arrow.desktop {
+    .left-arrow.desktop,
+    .right-arrow.desktop {
         display: none;   
     }
 
@@ -127,11 +128,11 @@
         align-items: center;
     }
 
-    #left-arrow.mobile,
-    #right-arrow.mobile {
+    .left-arrow.mobile,
+    .right-arrow.mobile {
         display: block;
-        width: 70px;
-}
+    }
+
     #createLessonButton.mobile {
         margin: 0 10px;
     }

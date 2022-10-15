@@ -2,7 +2,7 @@ const desktopCategoriesComponent = document.getElementById('categoriesComponent'
 const mobileCategoriesComponent = document.getElementById('mobileCategoryWrapper');
 const lesson = document.querySelector('.lesson');
 const downvoteBtn = document.getElementById('downvoteBtn');
-const leftArrow = document.getElementById('left-arrow');
+const leftArrows = document.querySelectorAll('.left-arrow');
 
 let upvoteMemory = [];
 let downvoteMemory = [];
@@ -33,7 +33,7 @@ const getRandLesson = (dataArray) => {
 }
 
 
-const getRandomLesson = async (category) => {
+const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
@@ -62,11 +62,11 @@ const getRandomLesson = async (category) => {
 
 
 const clickPreviousLesson = async () => {
-    console.log(lessonMemory[lessonMemory.length - 2]);  
+    console.log(lessonMemory[lessonMemory.length - 2])
     try {
         let data;
         if (lessonMemory.length > 1) {
-            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2].id}`);
+            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
                 lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
@@ -80,8 +80,8 @@ const clickPreviousLesson = async () => {
             getVotingBtnColors(data[0].id);
             lessonMemory.pop();
             leftArrowFunctionality();
-        } 
-    } catch (err) {
+        }  
+    } catch (err) { 
         console.log(err);  
     }
 }
@@ -90,7 +90,7 @@ const clickNextLesson = async () => {
 
     switch(currentCategoryId) {
         case 0:
-            getRandomLesson();
+            getRandomLessons();
             break;
         case 1:
             getCategoryLesson(1);
@@ -193,7 +193,7 @@ const openCategory = (categoryId) => {
     lessonMemory = [];
     highlightCategory();
     if (currentCategoryId === 0) {
-        getRandomLesson();
+        getRandomLessons();
     } else {
         getCategoryLesson(currentCategoryId);
     }
@@ -217,7 +217,7 @@ const getCategoryLesson = async (categoryId) => {
                 </div>`
             }
         getVotingBtnColors(randomLesson.id);
-        lessonMemory.push(randomLesson)
+        lessonMemory.push(randomLesson.id)
         leftArrowFunctionality();
     } catch (err) {
         console.log(err);
@@ -230,17 +230,19 @@ const getCategoryLesson = async (categoryId) => {
 
 
 
-
 const leftArrowFunctionality = () => {
-    if(lessonMemory.length > 1) {
-        leftArrow.style.cursor = 'pointer';
-        leftArrow.style.opacity = '100%';
-    } else {
-        leftArrow.style.cursor = 'auto';
-        leftArrow.style.opacity = '20%';
-    }
+    leftArrows.forEach((item) => {
+        if(lessonMemory.length > 1) {
+            item.style.cursor = 'pointer';
+            item.style.opacity = '100%';
+        } else {
+            item.style.cursor = 'auto';
+            item.style.opacity = '20%';
+        }
+    })
 }
 
+//checks if voting button has already been used based on memory and colors it respectively.
 const getVotingBtnColors = (lesson_id) => {
     upvoteMemory.forEach((value) => {
         if(lesson_id === value) {
@@ -253,7 +255,7 @@ const getVotingBtnColors = (lesson_id) => {
         }
     })
 }
-
+  
 
 const highlightCategory = () => {
     document.querySelectorAll('.category').forEach((classItem) => {
@@ -265,7 +267,7 @@ const highlightCategory = () => {
 
 const initWebApp = () => {
     getAllCategories();
-    getRandomLesson();
+    getRandomLessons();
     highlightCategory();
 }
 
