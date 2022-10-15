@@ -15,8 +15,8 @@ const getAllCategories = async () => {
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
-                desktopCategoriesComponent.innerHTML += `<p id="category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
-                mobileCategoriesComponent.innerHTML += `<p id="category-${value.id}" class="category mobile" onclick="openCategory(${value.id}); closeNavbar()">${value.category_emoji + ' ' + value.category_name}</p>`;
+                desktopCategoriesComponent.innerHTML += `<p id="desktop-category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
+                mobileCategoriesComponent.innerHTML += `<p id="mobile-category-${value.id}" class="category mobile" onclick="openCategory(${value.id}); closeNavbar()">${value.category_emoji + ' ' + value.category_name}</p>`;
             })
         } else {
             console.log('Response was not okay')
@@ -259,7 +259,8 @@ const highlightCategory = () => {
     document.querySelectorAll('.category').forEach((classItem) => {
         classItem.style.backgroundColor = 'unset'
     })
-    document.getElementById(`category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
+    document.getElementById(`desktop-category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
+    document.getElementById(`mobile-category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
 }
 
 const initWebApp = () => {
