@@ -18,10 +18,12 @@
 .lesson {
     background-color: white;
     max-width: 500px;
+    min-width: 300px;
     text-align: center;
     padding: 40px;
     margin: 0 30px;
     position: relative;
+    overflow-wrap: break-word;
 }
 
 .author {
@@ -89,7 +91,15 @@
         max-width: 400px;
     }
 
+    .left-arrow,
+    .right-arrow {
+        width: 80px;
+    }
+
 }
+    
+
+
 
 @media (max-width: 768px) {
     

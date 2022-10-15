@@ -1,0 +1,136 @@
+
+
+#creatorComponent {
+    max-width: 500px;
+    margin: 0 3%;
+    display: none;
+}
+
+#creatorComponent h2 {
+    font-size: 27px;
+}
+
+#creatorComponent .subtitle {
+    margin-top: 7px;
+    margin-bottom: 25px;
+    color: rgba(0, 0, 0, 0.513);
+    font-size: 17px;
+}
+
+form {
+    max-width: 500px;
+    position: relative;
+    display: block;
+}
+
+
+input, select, textarea, #submitButton, .exitButton {
+    border: none;
+    border-radius: 5px;
+}
+
+input, select, textarea {
+    background-color: #EFEFEF;
+    font-family: 'Times New Roman';
+    color: rgb(93, 93, 93);
+    font-size: 17px;
+    padding: 10px;
+}
+
+.inputWrapper {
+    max-width: 100%;
+    display: flex;
+}
+
+input {
+    margin-right: 5px;
+    max-width: 180px;
+}
+
+select {
+    max-width: 160px;
+}
+
+input, select {
+    height: 45px;
+}
+
+.textareaWrapper {
+    position: relative;
+}
+
+textarea {
+    max-width: 500px;
+    max-height: 400px;
+    min-height: 2.5rem;
+    width: 100%;
+    margin-top: 10px;
+    resize: vertical;
+}
+
+#textCountLimit {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 13px;
+    color: rgb(93, 93, 93);
+}
+
+#submitButton {
+    height: 45px;
+    background-color: #D28312;
+    padding: 0 15px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#submitButton:active {
+    background-color: #a8680e;
+}
+
+.formButtonWrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.exitButton {
+    width: 45px;
+    height: 45px;
+    background-color: #EFEFEF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.exitButton img {
+    margin-left: 6px;
+}
+
+.exitButton:active {
+    background-color:rgb(181, 181, 181);
+}
+
+@media (max-width: 1020px) {
+
+    input, select {
+        min-width: 0;
+        width: 100%;
+    }
+    
+}
+
+@media (max-width: 840px) {
+
+    .lesson {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    
+}

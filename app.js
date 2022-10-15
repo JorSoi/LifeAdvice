@@ -3,6 +3,9 @@ const mobileCategoriesComponent = document.getElementById('mobileCategoryWrapper
 const lesson = document.querySelector('.lesson');
 const downvoteBtn = document.getElementById('downvoteBtn');
 const leftArrows = document.querySelectorAll('.left-arrow');
+const rightArrows = document.querySelectorAll('.right-arrow');
+const dropdownContainer = document.getElementById('dropdownContainer');
+
 
 let upvoteMemory = [];
 let downvoteMemory = [];
@@ -17,6 +20,7 @@ const getAllCategories = async () => {
             data.forEach((value) => {
                 desktopCategoriesComponent.innerHTML += `<p id="desktop-category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
                 mobileCategoriesComponent.innerHTML += `<p id="mobile-category-${value.id}" class="category mobile" onclick="openCategory(${value.id}); closeNavbar()">${value.category_emoji + ' ' + value.category_name}</p>`;
+                dropdownContainer.innerHTML += `<option>${value.category_emoji + ' ' + value.category_name}</option>`;
             })
         } else {
             console.log('Response was not okay')
@@ -50,7 +54,7 @@ const getRandomLessons = async (category) => {
             </div>`
             getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
-            leftArrowFunctionality();
+            arrowFunctionality();
         } else {
             console.log('Response was not okay')
         }
@@ -79,7 +83,7 @@ const clickPreviousLesson = async () => {
             }
             getVotingBtnColors(data[0].id);
             lessonMemory.pop();
-            leftArrowFunctionality();
+            arrowFunctionality();
         }  
     } catch (err) { 
         console.log(err);  
@@ -218,7 +222,7 @@ const getCategoryLesson = async (categoryId) => {
             }
         getVotingBtnColors(randomLesson.id);
         lessonMemory.push(randomLesson.id)
-        leftArrowFunctionality();
+        arrowFunctionality();
     } catch (err) {
         console.log(err);
     }
@@ -230,7 +234,7 @@ const getCategoryLesson = async (categoryId) => {
 
 
 
-const leftArrowFunctionality = () => {
+const arrowFunctionality = () => {
     leftArrows.forEach((item) => {
         if(lessonMemory.length > 1) {
             item.style.cursor = 'pointer';
@@ -239,6 +243,9 @@ const leftArrowFunctionality = () => {
             item.style.cursor = 'auto';
             item.style.opacity = '20%';
         }
+    })
+    rightArrows.forEach((item) => {
+        item.style.opacity = '100%';
     })
 }
 
