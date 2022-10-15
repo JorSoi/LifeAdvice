@@ -81,7 +81,7 @@ body {
     .logo {
         position: unset;
         padding: 15px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.179)
+        border-bottom: 1px solid rgba(0, 0, 0, 0.179);
     }
     
     .copyright {

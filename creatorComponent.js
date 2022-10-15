@@ -1,8 +1,5 @@
-const creatorComponent = document.getElementById('creatorComponent');
-const usernameInput = document.getElementById('usernameInput');
-const lessonInput = document.getElementById('lessonInput');
-const sidebar = document.getElementById('sidebar');
-const exitButton = document.querySelector('.exitButton');
+
+
 
 usernameInput.addEventListener('input', () => {
     let userValue = usernameInput.value;
@@ -32,25 +29,45 @@ const showPreviewLesson = (userValue = 'Username', lessonValue = '') => {
         <button id="upvoteBtn">👍🏼 <span> 0</span></button>
         <button id="downvoteBtn">👎🏼 <span> 0</span></button>
     </div>`
+    lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
 }
 
 const openCreatorComponent = () => {
     showPreviewLesson();
     deactivateArrowInteraction();
     desktopCategoriesComponent.style.display = 'none';
-    mobileCategoriesComponent.style.display = 'none';
     creatorComponent.style.display = 'block';
     sidebar.style.minWidth = '40vw';  
+    if (window.innerWidth < 768) {
+        sidebar.style.height = '100vh';
+        contentBody.style.display  = 'none';
+        sidebar.style.display = 'flex';
+        sidebar.firstElementChild.style.position = 'absolute';
+        sidebar.firstElementChild.style.padding = 'unset';
+        sidebar.firstElementChild.style.border = 'none';
+        sidebar.firstElementChild.style.top = '15px';
+        sidebar.firstElementChild.style.left = '15px';
+    }
 }
 
 
 const closeCreatorComponent = () => {
     activateArrowInteraction();
-    openCategory(currentCategoryId);
-    desktopCategoriesComponent.style.display = 'block';
-    mobileCategoriesComponent.style.display = 'block';
+    clickPreviousLesson();
     creatorComponent.style.display = 'none';
-    sidebar.style.minWidth = '20vw';  
+    sidebar.style.minWidth = '20vw';
+    if (window.innerWidth > 425) {
+        desktopCategoriesComponent.style.display = 'flex';
+    }
+    if (window.innerWidth < 768) {
+        sidebar.style.height = 'auto';
+        contentBody.style.display  = 'flex';
+        sidebar.style.display = 'block';
+        sidebar.firstElementChild.style.position = 'unset';
+        sidebar.firstElementChild.style.padding = '15px';
+        sidebar.firstElementChild.style.borderBottom = '1px solid rgba(0, 0, 0, 0.179)';
+    }  
+    
 }
 
 
@@ -75,3 +92,5 @@ const activateArrowInteraction = () => {
         item.style.pointerEvents = 'unset';
     })
 }
+
+

@@ -1,10 +1,4 @@
-const desktopCategoriesComponent = document.getElementById('categoriesComponent');
-const mobileCategoriesComponent = document.getElementById('mobileCategoryWrapper');
-const lesson = document.querySelector('.lesson');
-const downvoteBtn = document.getElementById('downvoteBtn');
-const leftArrows = document.querySelectorAll('.left-arrow');
-const rightArrows = document.querySelectorAll('.right-arrow');
-const dropdownContainer = document.getElementById('dropdownContainer');
+
 
 
 let upvoteMemory = [];
