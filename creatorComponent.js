@@ -36,6 +36,7 @@ const showPreviewLesson = (userValue = 'Username', lessonValue = '') => {
 const openCreatorComponent = () => {
     showPreviewLesson();
     deactivateArrowInteraction();
+    cleanUpForm();
     desktopCategoriesComponent.style.display = 'none';
     creatorComponent.style.display = 'block';
     sidebar.style.minWidth = '40vw';  
@@ -116,4 +117,10 @@ const showCharCount = (value) => {
     } else {
         textCountLimit.style.color = '#5d5d5d';
     }
+}
+
+const cleanUpForm = () => {
+    usernameInput.value = '';
+    lessonInput.value = '';
+    dropdownContainer.value = '';
 }
