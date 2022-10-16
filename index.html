@@ -48,25 +48,26 @@
         <div id="creatorComponent">
             <h2>Tell us lessons life taught you!</h2>
             <p class="subtitle">You learned something others haven't but you think they should know? No matter how you learned, share your unique lessons with our community so that you wont be the only one having learned it!</p>
-            <form>
+            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+            <form autocomplete="off" action="http://localhost:3000/lesson/create" method="post" target="dummyframe">
                 <div class="inputWrapper">
-                    <input id ="usernameInput" type="text" placeholder="Username" minlength="4" maxlength="20"/>
-                    <select id="dropdownContainer">
-                    <option>Category</option>
-                    <!-- Displaying categories fetched from db -->
+                    <input id ="usernameInput" type="text" placeholder="Username" minlength="4" maxlength="20" name="author" required="required" />
+                    <select id="dropdownContainer" name="category_id" required="required">
+                        <option value="">Category</option>
+                        <!-- Displaying categories fetched from db -->
                     </select>
                 </div>
                 <div class="textareaWrapper">
-                    <textarea id="lessonInput" name="message" rows="10" cols="30" maxlength="200" minlength="7" placeholder="Tell us what life has taught you!"></textarea>
-                    <p id="textCountLimit">0/200</p>
+                    <textarea id="lessonInput" name="lesson" rows="10" cols="30" maxlength="250" minlength="7" placeholder="Tell us what life has taught you!" required="required"></textarea>
+                    <p id="textCountLimit">0/250</p>
                 </div>
                 <div class="formButtonWrapper">
                     <button class="exitButton" type="button" onclick="closeCreatorComponent()"><img src="./assets/backicon.svg"/></button>
-                    <button id="submitButton" type="submit">Share the lesson!</button>
+                    <button id="submitButton" type="submit" onclick="closeCreatorComponent()">Share the lesson!</button>
                 </div>
             </form>
         </div>
-        
+         
     </nav>
 
     <div id="contentBody">

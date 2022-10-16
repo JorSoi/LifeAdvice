@@ -14,3 +14,4 @@ const lessonInput = document.getElementById('lessonInput');
 const sidebar = document.getElementById('sidebar');
 const exitButton = document.querySelector('.exitButton');
 const contentBody = document.getElementById('contentBody');
+const textCountLimit = document.getElementById('textCountLimit');

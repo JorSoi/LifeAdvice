@@ -14,7 +14,7 @@ const getAllCategories = async () => {
             data.forEach((value) => {
                 desktopCategoriesComponent.innerHTML += `<p id="desktop-category-${value.id}" class="category" onclick="openCategory(${value.id})">${value.category_emoji + ' ' + value.category_name}</p>`;
                 mobileCategoriesComponent.innerHTML += `<p id="mobile-category-${value.id}" class="category mobile" onclick="openCategory(${value.id}); closeNavbar()">${value.category_emoji + ' ' + value.category_name}</p>`;
-                dropdownContainer.innerHTML += `<option>${value.category_emoji + ' ' + value.category_name}</option>`;
+                dropdownContainer.innerHTML += `<option value="${value.id}">${value.category_emoji + ' ' + value.category_name}</option>`;
             })
         } else {
             console.log('Response was not okay')
@@ -196,7 +196,6 @@ const openCategory = (categoryId) => {
         getCategoryLesson(currentCategoryId);
     }
 }
-
 
 
 const getCategoryLesson = async (categoryId) => {

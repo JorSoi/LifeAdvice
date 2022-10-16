@@ -16,7 +16,8 @@ lessonInput.addEventListener('input', () => {
     if (!userValue) {
         userValue = 'Username';
     }
-    showPreviewLesson(userValue, lessonValue)
+    showPreviewLesson(userValue, lessonValue);
+    showCharCount(lessonValue);
 })
 
 
@@ -29,7 +30,7 @@ const showPreviewLesson = (userValue = 'Username', lessonValue = '') => {
         <button id="upvoteBtn">👍🏼 <span> 0</span></button>
         <button id="downvoteBtn">👎🏼 <span> 0</span></button>
     </div>`
-    lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
+   
 }
 
 const openCreatorComponent = () => {
@@ -52,11 +53,15 @@ const openCreatorComponent = () => {
 
 
 const closeCreatorComponent = () => {
+    lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
     activateArrowInteraction();
     clickPreviousLesson();
     creatorComponent.style.display = 'none';
     sidebar.style.minWidth = '20vw';
-    if (window.innerWidth > 425) {
+    if (window.innerWidth > 768) {
+        desktopCategoriesComponent.style.display = 'block';
+    }
+    if (window.innerWidth > 425 && window.innerWidth < 769) {
         desktopCategoriesComponent.style.display = 'flex';
     }
     if (window.innerWidth < 768) {
@@ -94,3 +99,21 @@ const activateArrowInteraction = () => {
 }
 
 
+const validateFormInput = () => {
+    console.log('now its sent');
+    validInput = true;
+}
+
+const showCharCount = (value) => {
+    let maxChar = 250;
+    let currentChar = value.length;
+    let percentageUsed = currentChar/maxChar;
+    textCountLimit.innerHTML = `${currentChar}/${maxChar}`;
+    if (percentageUsed > 0.85) {
+        textCountLimit.style.color = '#d51818';
+    } else if (percentageUsed > 0.7) {
+        textCountLimit.style.color = '#d58618';
+    } else {
+        textCountLimit.style.color = '#5d5d5d';
+    }
+}

@@ -9,7 +9,8 @@ const morgan = require('morgan');
 
 
 //Middleware
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan('tiny'));
 
@@ -61,10 +62,22 @@ app.get('/lessons/category/:categoryId', async (req, res) => {
 
 
 
-app.post('/lessons/newlesson', async (req, res) => {
-    //creates new lesson here
-})
+app.post('/lesson/create', async (req, res) => {
+        console.log(req.body)
+    try {
+        await pool.query("INSERT INTO lessons VALUES(DEFAULT, $1, $2, $3, 0, 0)", [req.body.category_id, req.body.lesson, req.body.author], (error, result) => {
+            if(!error) {
+                res.sendStatus(201);
+            } else {
+                res.sendStatus(400);
+            }
+        });
+        
 
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 
 
