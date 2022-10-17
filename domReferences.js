@@ -12,6 +12,10 @@ const creatorComponent = document.getElementById('creatorComponent');
 const usernameInput = document.getElementById('usernameInput');
 const lessonInput = document.getElementById('lessonInput');
 const sidebar = document.getElementById('sidebar');
+const submitButton = document.getElementById('submitButton');
 const exitButton = document.querySelector('.exitButton');
 const contentBody = document.getElementById('contentBody');
 const textCountLimit = document.getElementById('textCountLimit');
+
+//For successPopup
+const successPopup = document.getElementById('successMessageWrapper');

@@ -52,11 +52,23 @@ const openCreatorComponent = () => {
     }
 }
 
+function formValidation () {
+    if(usernameInput.value && lessonInput.value && dropdownContainer.value) {
+        console.log('everything is filled out and can be submitted');
+    } else {
+
+    }
+}
 
 const closeCreatorComponent = () => {
-    lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
+    if(usernameInput.value.length > usernameInput.minLength &&
+       lessonInput.value.length > lessonInput.minLength &&
+       dropdownContainer.value) {
+        console.log('everything is filled out and can be submitted');
+        lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
     activateArrowInteraction();
     clickPreviousLesson();
+    showSuccessMessage();
     creatorComponent.style.display = 'none';
     sidebar.style.minWidth = '20vw';
     if (window.innerWidth > 768) {
@@ -73,6 +85,10 @@ const closeCreatorComponent = () => {
         sidebar.firstElementChild.style.padding = '15px';
         sidebar.firstElementChild.style.borderBottom = '1px solid rgba(0, 0, 0, 0.179)';
     }  
+    } else {
+        console.log('form not sufficiently filled out')
+    }
+    
     
 }
 
@@ -123,4 +139,5 @@ const cleanUpForm = () => {
     usernameInput.value = '';
     lessonInput.value = '';
     dropdownContainer.value = '';
+    showCharCount(lessonInput.value)
 }

@@ -11,15 +11,27 @@
     <script src="app.js" defer></script>
     <script src="mobileNav.js" defer></script>
     <script src="creatorComponent.js" defer></script>
+    <script src="successPopup.js" defer></script>
     <!-- Component Style Sheets -->
     <link href="./styles/global.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/categoriesComponent.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/lessonsComponent.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/creatorComponent.css" rel="stylesheet" type="text/css"/>
     <link href="./styles/mobileNav.css" rel="stylesheet" type="text/css"/>
+    <link href="./styles/successPopup.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div id="successMessageWrapper" onclick="hideSuccessMessage()">
+        <div id ="successMessage">
+            <img src="assets/checkmark.svg" alt="checkmark"/>
+            <p>Lesson successfully posted to <span>🧠 Mental Health</span>.</p>
+        </div>
+    </div>
     <div id="hamburgerMenu" onclick="toggleNav()">
         <div></div>
         <div></div>
@@ -38,7 +50,7 @@
         
 
        
-        <p class="copyright">Jorim Soika ©2022</p>
+        <p class="copyright">Lifelessons ©2022</p>
 
         <div id="categoriesComponent">
             <p class="category" id="desktop-category-0" onclick="openCategory(0)">🎲 Random Lesson</p>
@@ -63,7 +75,7 @@
                 </div>
                 <div class="formButtonWrapper">
                     <button class="exitButton" type="button" onclick="closeCreatorComponent()"><img src="./assets/backicon.svg"/></button>
-                    <button id="submitButton" type="submit" onclick="closeCreatorComponent()">Share the lesson!</button>
+                    <button id="submitButton" type="submit" onclick="closeCreatorComponent()" >Share the lesson!</button>
                 </div>
             </form>
         </div>
@@ -82,7 +94,7 @@
 
         <div class="mobileButtonWrapper">
             <img class="left-arrow mobile" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>
-            <button id="createLessonButton" class="mobile" onclick="openCreatorComponent()">Add your own life lesson!</button>
+            <button id="createLessonButton" class="mobile" onclick="openCreatorComponent()">Add life lesson!</button>
             <img class="right-arrow mobile" onclick="clickNextLesson()" src="assets/arrow.svg"/>
         </div>
     </div>

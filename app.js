@@ -1,6 +1,4 @@
 
-
-
 let upvoteMemory = [];
 let downvoteMemory = [];
 let lessonMemory = [];

@@ -1,0 +1,36 @@
+#successMessageWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: -60px;
+    z-index: 9998;
+    font-family: 'Inter', 'Times New Roman', Times, serif;
+    font-size: 14px;
+    color: white;
+    opacity: 0%;
+    transition-property: bottom, opacity;
+    transition-duration: 500ms;
+    transition-delay: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+#successMessage {
+    max-width: 400px;
+    margin: 0 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #47CD64;
+    padding: 13px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#successMessage p {
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+
+}
