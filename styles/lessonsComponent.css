@@ -68,7 +68,7 @@
     width: 70px;
 }
 
-#createLessonButton {
+.createLessonButton {
     border-radius: 5px;
     position: absolute;
     bottom: -100px;
@@ -79,7 +79,7 @@
     cursor: pointer;
 }
 
-#createLessonButton.mobile {
+.createLessonButton.mobile {
     display: none;
 }
 
@@ -103,25 +103,29 @@
 
 @media (max-width: 768px) {
     
-    .lessonsComponent {
-        position: unset;
-        justify-content: center;
-    }
-
-    #createLessonButton.desktop {
-        display: none;
-    }
-
-    #createLessonButton.mobile {
-        position: unset;
-        transform: unset;
-        margin-top: 20px;
-        display: block;
+    .createLessonButton.desktop {
+        bottom: -75px;
     }
 }
 
 
 @media (max-width: 550px) {
+
+    .lessonsComponent {
+        position: unset;
+        justify-content: center;
+    }
+
+    .createLessonButton.desktop {
+        display: none;
+    }
+
+    .createLessonButton.mobile {
+        position: unset;
+        transform: unset;
+        margin-top: 20px;
+        display: block;
+    }
 
     .lesson {
         margin: 0px;
@@ -143,7 +147,7 @@
         display: block;
     }
 
-    #createLessonButton.mobile {
+    .createLessonButton.mobile {
         margin: 0 10px;
     }
 }

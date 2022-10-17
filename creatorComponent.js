@@ -35,7 +35,7 @@ const showPreviewLesson = (userValue = 'Username', lessonValue = '') => {
 
 const openCreatorComponent = () => {
     showPreviewLesson();
-    deactivateArrowInteraction();
+    deacivateLessonInteraction();
     cleanUpForm();
     desktopCategoriesComponent.style.display = 'none';
     creatorComponent.style.display = 'block';
@@ -52,23 +52,18 @@ const openCreatorComponent = () => {
     }
 }
 
-function formValidation () {
-    if(usernameInput.value && lessonInput.value && dropdownContainer.value) {
-        console.log('everything is filled out and can be submitted');
-    } else {
-
+const submitLesson = () => {
+    if(usernameInput.value.length > usernameInput.minLength && lessonInput.value.length > lessonInput.minLength && dropdownContainer.value) { 
+       closeCreatorComponent();
+       showSuccessMessage();
     }
 }
 
 const closeCreatorComponent = () => {
-    if(usernameInput.value.length > usernameInput.minLength &&
-       lessonInput.value.length > lessonInput.minLength &&
-       dropdownContainer.value) {
-        console.log('everything is filled out and can be submitted');
-        lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
+    console.log('everything is filled out and can be submitted');
+    lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
     activateArrowInteraction();
     clickPreviousLesson();
-    showSuccessMessage();
     creatorComponent.style.display = 'none';
     sidebar.style.minWidth = '20vw';
     if (window.innerWidth > 768) {
@@ -85,15 +80,10 @@ const closeCreatorComponent = () => {
         sidebar.firstElementChild.style.padding = '15px';
         sidebar.firstElementChild.style.borderBottom = '1px solid rgba(0, 0, 0, 0.179)';
     }  
-    } else {
-        console.log('form not sufficiently filled out')
-    }
-    
-    
 }
 
 
-const deactivateArrowInteraction = () => {
+const deacivateLessonInteraction = () => {
     leftArrows.forEach((item) => {
         item.style.pointerEvents = 'none';
         item.style.opacity = '20%';
@@ -104,6 +94,7 @@ const deactivateArrowInteraction = () => {
         item.style.opacity = '20%';
         item.style.cursor = 'auto';
     })
+    
 }
 
 const activateArrowInteraction = () => {
@@ -112,6 +103,7 @@ const activateArrowInteraction = () => {
     })
     rightArrows.forEach((item) => {
         item.style.pointerEvents = 'unset';
+        item.style.cursor = 'pointer';
     })
 }
 

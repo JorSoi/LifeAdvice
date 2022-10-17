@@ -75,7 +75,7 @@
                 </div>
                 <div class="formButtonWrapper">
                     <button class="exitButton" type="button" onclick="closeCreatorComponent()"><img src="./assets/backicon.svg"/></button>
-                    <button id="submitButton" type="submit" onclick="closeCreatorComponent()" >Share the lesson!</button>
+                    <button id="submitButton" type="submit" onclick="submitLesson()">Share the lesson!</button>
                 </div>
             </form>
         </div>
@@ -89,12 +89,12 @@
                 <!-- Displaying lesson fetched from db  -->
             </div>
             <img class="right-arrow desktop" onclick="clickNextLesson()" src="assets/arrow.svg"/>
-            <button id="createLessonButton" class="desktop" onclick="openCreatorComponent()">Add your own life lesson!</button>
+            <button class="createLessonButton desktop" onclick="openCreatorComponent()">Add your own life lesson!</button>
         </div>
 
         <div class="mobileButtonWrapper">
             <img class="left-arrow mobile" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>
-            <button id="createLessonButton" class="mobile" onclick="openCreatorComponent()">Add life lesson!</button>
+            <button class="createLessonButton mobile" onclick="openCreatorComponent()">Add life lesson!</button>
             <img class="right-arrow mobile" onclick="clickNextLesson()" src="assets/arrow.svg"/>
         </div>
     </div>
