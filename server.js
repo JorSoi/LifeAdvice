@@ -19,7 +19,7 @@ app.use(morgan('tiny'));
 //CRUD Routes
 app.get('/categories', async (req, res) => {
     try {
-        const db_res = await pool.query("SELECT * FROM categories");
+        const db_res = await pool.query("SELECT * FROM categories ORDER BY id");
         res.status(200).send(db_res.rows);
     } catch (err) {
         console.log(err);

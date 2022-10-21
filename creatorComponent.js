@@ -53,14 +53,14 @@ const openCreatorComponent = () => {
 }
 
 const submitLesson = () => {
-    if(usernameInput.value.length > usernameInput.minLength && lessonInput.value.length > lessonInput.minLength && dropdownContainer.value) { 
-       closeCreatorComponent();
-       showSuccessMessage();
+    if(usernameInput.value.length >= usernameInput.minLength && lessonInput.value.length >= lessonInput.minLength && dropdownContainer.value) { 
+        showSuccessMessage(); //invoke before closeCreatorComponent otherwise no value will be found!
+        closeCreatorComponent();
+       
     }
 }
 
 const closeCreatorComponent = () => {
-    console.log('everything is filled out and can be submitted');
     lessonMemory.push(-1) //used to make compatible with clickpreviousfunction when closing creatorComponent.
     activateArrowInteraction();
     clickPreviousLesson();
@@ -108,10 +108,6 @@ const activateArrowInteraction = () => {
 }
 
 
-const validateFormInput = () => {
-    console.log('now its sent');
-    validInput = true;
-}
 
 const showCharCount = (value) => {
     let maxChar = 250;

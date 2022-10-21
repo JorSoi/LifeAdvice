@@ -3,7 +3,7 @@
     justify-content: center;
     width: 100%;
     position: absolute;
-    bottom: -60px;
+    bottom: -60px; 
     z-index: 9998;
     font-family: 'Inter', 'Times New Roman', Times, serif;
     font-size: 14px;
@@ -30,6 +30,14 @@
 #successMessage p {
     margin-left: 10px;
 }
+
+#success-popup-category {
+    background-color: #23ad419f;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
 
 @media (max-width: 768px) {
 

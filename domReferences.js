@@ -19,3 +19,4 @@ const textCountLimit = document.getElementById('textCountLimit');
 
 //For successPopup
 const successPopup = document.getElementById('successMessageWrapper');
+const successPopupCategory = document.getElementById('success-popup-category');
