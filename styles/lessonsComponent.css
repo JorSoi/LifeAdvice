@@ -55,11 +55,8 @@
     border: none;
 }
 
-
-
-.lesson button:active,
-#createLessonButton:active {
-    background-color: rgb(181, 181, 181);
+.createLessonButton:active {
+    background-color: #a4690f;
 }
 
 .left-arrow.mobile,
@@ -75,8 +72,11 @@
     left: 50%;
     transform: translate(-50%, 0);
     padding: 15px;
-    font-weight: 600;
     cursor: pointer;
+    background-color: #D28412;
+    border: none;
+    color: white;
+    font-weight: 600;
 }
 
 .createLessonButton.mobile {
