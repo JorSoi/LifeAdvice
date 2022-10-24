@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 const pool = require('./db.js');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -99,5 +99,5 @@ app.post('/lesson/create', async (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`);
+    console.log(`Listening on PORT: ${PORT}`);
 })
