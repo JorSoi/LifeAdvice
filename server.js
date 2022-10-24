@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 
 app.get('/categories', async (req, res) => {
     try {
-        const db_res = await pool.query("SELECT * FROM categories ORDER BY id");
+        const db_res = await pool.query("SELECT * FROM categories ORDER BY id;");
         res.status(200).send(db_res.rows);
     } catch (err) {
         console.log(err);
@@ -36,7 +36,7 @@ app.get('/categories', async (req, res) => {
 
 app.get('/lessons', async (req, res) => {
     try {
-        const db_res = await pool.query("SELECT * FROM lessons")
+        const db_res = await pool.query("SELECT * FROM lessons;")
         res.status(200).send(db_res.rows);
     } catch (err) {
         console.log(err);
@@ -44,12 +44,12 @@ app.get('/lessons', async (req, res) => {
 }); 
 
 app.get('/lessons/:lesson_id', async (req, res) => {
-    const db_res = await pool.query("SELECT * FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT * FROM lessons WHERE id = $1;", [req.params.lesson_id]);
     res.status(200).send(db_res.rows); 
 })
 
 app.put('/lessons/upvote/:lesson_id', async (req, res) => {
-    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes + 1 WHERE id = $1", [req.params.lesson_id]);
+    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes + 1 WHERE id = $1;", [req.params.lesson_id]);
     const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
     res.send(db_res.rows);
 })
