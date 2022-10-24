@@ -6,7 +6,7 @@ let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it o
 
 const getAllCategories = async () => {
     try {
-        const response = await fetch('/server.js/categories');
+        const response = await fetch('https://lifeadvice.herokuapp.com/categories');
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
@@ -29,11 +29,12 @@ const getRandLesson = (dataArray) => {
 }
 
 
+
 const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
-        const response = await fetch('server.js/lessons');
+        const response = await fetch('https://lifeadvice.herokuapp.com/lessons');
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
