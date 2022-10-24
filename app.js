@@ -6,7 +6,7 @@ let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it o
 
 const getAllCategories = async () => {
     try {
-        const response = await fetch(__dirname + '/categories');
+        const response = await fetch('/server.js/categories');
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
@@ -33,7 +33,7 @@ const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
-        const response = await fetch(__dirname + '/lessons');
+        const response = await fetch('server.js/lessons');
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
