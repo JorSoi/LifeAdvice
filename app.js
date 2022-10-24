@@ -6,7 +6,7 @@ let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it o
 
 const getAllCategories = async () => {
     try {
-        const response = await fetch('https://lifeadvice.herokuapp.com/categories');
+        const response = await fetch('https://git.heroku.com/lifeadvice.git/categories');
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
