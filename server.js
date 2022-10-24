@@ -9,7 +9,6 @@ const morgan = require('morgan');
 
 
 //Middleware
-app.use(express.static(path.join(__dirname, 'styles')));
 app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
