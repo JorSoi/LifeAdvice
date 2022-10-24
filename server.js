@@ -17,6 +17,12 @@ app.use(morgan('tiny'));
 
 
 //CRUD Routes
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+})
+
+
 app.get('/categories', async (req, res) => {
     try {
         const db_res = await pool.query("SELECT * FROM categories ORDER BY id");
