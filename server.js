@@ -8,6 +8,7 @@ const morgan = require('morgan');
 
 
 
+ 
 //Middleware
 app.use(express.static(__dirname));
 app.use(express.json());
@@ -15,9 +16,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan('tiny'));
 
-console.log(process.env);
-//CRUD Routes
 
+//CRUD Routes
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
 })
@@ -30,7 +30,7 @@ app.get('/categories', async (req, res) => {
     } catch (err) {
         console.log('database query fucked up for categories' + err);
         res.sendStatus(500);
-    }
+    } 
 });
 
 app.get('/lessons', async (req, res) => {

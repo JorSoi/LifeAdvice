@@ -7,13 +7,6 @@ const leftArrows = document.querySelectorAll('.left-arrow');
 const rightArrows = document.querySelectorAll('.right-arrow');
 const dropdownContainer = document.getElementById('dropdownContainer');
 
-//Environment Manager
-let baseURL;
-if (process.env.NODE_ENV === 'development') {
-    baseURL = `http://localhost:${PORT}`;
-} else {
-    baseURL = 'https://lifeadvice.herokuapp.com/';
-}
 
 
 //For creatorComponent.js

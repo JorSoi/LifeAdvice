@@ -4,9 +4,11 @@ let downvoteMemory = [];
 let lessonMemory = [];
 let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it orients by categoryId
 
+
+
 const getAllCategories = async () => {
     try {
-        const response = await fetch(`${baseURL}/categories`);
+        const response = await fetch(`/categories`);
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
@@ -34,7 +36,7 @@ const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
-        const response = await fetch(`${baseURL}/lessons`);
+        const response = await fetch(`/lessons`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
@@ -63,7 +65,7 @@ const clickPreviousLesson = async () => {
     try {
         let data;
         if (lessonMemory.length > 1) {
-            const response = await fetch(`${baseURL}/lessons/${lessonMemory[lessonMemory.length - 2]}`);
+            const response = await fetch(`/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
                 lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
@@ -124,7 +126,7 @@ const clickNextLesson = async () => {
 const upvote = async (lesson_id) => {
     
     try {
-        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
+        const getResponse = await fetch(`/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -134,7 +136,7 @@ const upvote = async (lesson_id) => {
                 return getData[0].id == value;
             })
             if (!liked && !disliked) {
-                const putResponse = await fetch(`${baseURL}/lessons/upvote/${lesson_id}`, {
+                const putResponse = await fetch(`/lessons/upvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -155,7 +157,7 @@ const upvote = async (lesson_id) => {
 const downvote = async (lesson_id) => {
 
     try {
-        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
+        const getResponse = await fetch(`/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -165,7 +167,7 @@ const downvote = async (lesson_id) => {
                 return getData[0].id == value;
             })
             if (!disliked & !liked) {
-                const putResponse = await fetch(`${baseURL}/lessons/downvote/${lesson_id}`, {
+                const putResponse = await fetch(`/lessons/downvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -200,7 +202,7 @@ const openCategory = (categoryId) => {
 const getCategoryLesson = async (categoryId) => {
     try {
         let randomLesson;
-        const response = await fetch(`${baseURL}/lessons/category/${categoryId}`);
+        const response = await fetch(`/lessons/category/${categoryId}`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
