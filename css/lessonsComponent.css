@@ -24,6 +24,7 @@
     margin: 0 30px;
     position: relative;
     overflow-wrap: break-word;
+    border-radius: 6px;
 }
 
 .author {
