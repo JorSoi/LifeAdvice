@@ -9,7 +9,7 @@ CREATE TABLE lessons (
   id SERIAL PRIMARY KEY,
   category_id  integer REFERENCES categories(id),
   lesson varchar(250) NOT NULL,
-  author_name varchar(20),
+  author varchar(20),
   upvotes integer,
   downvotes integer
   );
