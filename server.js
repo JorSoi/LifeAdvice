@@ -29,7 +29,7 @@ app.get('/categories', async (req, res) => {
         const db_res = await pool.query("SELECT * FROM categories ORDER BY id;");
         res.status(200).send(db_res.rows);
     } catch (err) {
-        console.log(err);
+        console.log('database query fucked up for categories' + err);
         res.sendStatus(500);
     }
 });
@@ -39,7 +39,7 @@ app.get('/lessons', async (req, res) => {
         const db_res = await pool.query("SELECT * FROM lessons;")
         res.status(200).send(db_res.rows);
     } catch (err) {
-        console.log(err);
+        console.log('database query didnt work for lessons' + err);
     }
 }); 
 
