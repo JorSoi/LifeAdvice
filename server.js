@@ -16,7 +16,7 @@ app.use(cors());
 app.use(morgan('tiny'));
 
 
-
+console.log(process.env.NODE_ENV);
 //CRUD Routes
 
 app.get('/', (req, res) => {
