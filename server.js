@@ -15,8 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan('tiny'));
 
-
-console.log(process.env.NODE_ENV);
+console.log(process.env);
 //CRUD Routes
 
 app.get('/', (req, res) => {
@@ -89,7 +88,7 @@ app.post('/lesson/create', async (req, res) => {
 
 
 
-
+console.log(pool);
 
 
 

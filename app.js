@@ -6,7 +6,7 @@ let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it o
 
 const getAllCategories = async () => {
     try {
-        const response = await fetch('https://lifeadvice.herokuapp.com/categories');
+        const response = await fetch(`${baseURL}/categories`);
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
@@ -22,7 +22,7 @@ const getAllCategories = async () => {
     }
 }
 
-//Get Random Lesson Object out of the array from the resolved data promise.
+//Get Random Lesson Object out of the fetched lessons array
 const getRandLesson = (dataArray) => {
     let randomValue = Math.floor(Math.random()* (dataArray.length));
     return dataArray[randomValue]
@@ -34,7 +34,7 @@ const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
-        const response = await fetch('https://lifeadvice.herokuapp.com/lessons');
+        const response = await fetch(`${baseURL}/lessons`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
@@ -63,7 +63,7 @@ const clickPreviousLesson = async () => {
     try {
         let data;
         if (lessonMemory.length > 1) {
-            const response = await fetch(`http://localhost:3000/lessons/${lessonMemory[lessonMemory.length - 2]}`);
+            const response = await fetch(`${baseURL}/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
                 lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
@@ -124,7 +124,7 @@ const clickNextLesson = async () => {
 const upvote = async (lesson_id) => {
     
     try {
-        const getResponse = await fetch(`http://localhost:3000/lessons/${lesson_id}`);
+        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -134,7 +134,7 @@ const upvote = async (lesson_id) => {
                 return getData[0].id == value;
             })
             if (!liked && !disliked) {
-                const putResponse = await fetch(`http://localhost:3000/lessons/upvote/${lesson_id}`, {
+                const putResponse = await fetch(`${baseURL}/lessons/upvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -155,7 +155,7 @@ const upvote = async (lesson_id) => {
 const downvote = async (lesson_id) => {
 
     try {
-        const getResponse = await fetch(`http://localhost:3000/lessons/${lesson_id}`);
+        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -165,7 +165,7 @@ const downvote = async (lesson_id) => {
                 return getData[0].id == value;
             })
             if (!disliked & !liked) {
-                const putResponse = await fetch(`http://localhost:3000/lessons/downvote/${lesson_id}`, {
+                const putResponse = await fetch(`${baseURL}/lessons/downvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -200,7 +200,7 @@ const openCategory = (categoryId) => {
 const getCategoryLesson = async (categoryId) => {
     try {
         let randomLesson;
-        const response = await fetch(`http://localhost:3000/lessons/category/${categoryId}`);
+        const response = await fetch(`${baseURL}/lessons/category/${categoryId}`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
@@ -271,3 +271,4 @@ const initWebApp = () => {
 }
 
 initWebApp();
+
