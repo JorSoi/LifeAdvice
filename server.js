@@ -35,7 +35,7 @@ app.get('/categories', async (req, res) => {
 
 app.get('/lessons', async (req, res) => {
     try {
-        const db_res = await pool.query("SELECT * FROM lessons;")
+        const db_res = await pool.query("SELECT lessons.*, categories.category_emoji FROM lessons JOIN categories ON lessons.category_id = categories.id;")
         res.status(200).send(db_res.rows);
     } catch (err) {
         console.log('database query didnt work for lessons' + err);
@@ -43,13 +43,14 @@ app.get('/lessons', async (req, res) => {
 }); 
 
 app.get('/lessons/:lesson_id', async (req, res) => {
-    const db_res = await pool.query("SELECT * FROM lessons WHERE id = $1;", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT lessons.*, categories.category_emoji FROM lessons JOIN categories ON lessons.category_id = categories.id WHERE lessons.id = $1;", [req.params.lesson_id]);
+    console.log(db_res.rows);
     res.status(200).send(db_res.rows); 
 })
 
 app.put('/lessons/upvote/:lesson_id', async (req, res) => {
-    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes + 1 WHERE id = $1;", [req.params.lesson_id]);
-    const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE id = $1", [req.params.lesson_id]);
+    const db_updt = await pool.query("UPDATE lessons SET upvotes = upvotes + 1 WHERE lessons.id = $1;", [req.params.lesson_id]);
+    const db_res = await pool.query("SELECT id, upvotes FROM lessons WHERE lessons.id = $1;", [req.params.lesson_id]);
     res.send(db_res.rows);
 })
 
@@ -62,7 +63,7 @@ app.put('/lessons/downvote/:lesson_id', async (req, res) => {
 
 
 app.get('/lessons/category/:categoryId', async (req, res) => {
-    const db_res = await pool.query("SELECT * FROM lessons WHERE category_id = $1", [req.params.categoryId]);
+    const db_res = await pool.query("SELECT lessons.*, categories.category_emoji FROM lessons JOIN categories ON lessons.category_id = categories.id WHERE category_id = $1", [req.params.categoryId]);
     res.status(200).send(db_res.rows); 
 });
 

@@ -1,3 +1,4 @@
+const baseURL = 'http://localhost:3000';
 
 let upvoteMemory = [];
 let downvoteMemory = [];
@@ -8,7 +9,7 @@ let currentCategoryId = 0; // 0 is default (show random lesson). Afterwards it o
 
 const getAllCategories = async () => {
     try {
-        const response = await fetch(`/categories`);
+        const response = await fetch(`${baseURL}/categories`);
         if (response.ok) {
             const data = await response.json();
             data.forEach((value) => {
@@ -36,11 +37,15 @@ const getRandomLessons = async (category) => {
     try {
         let randomLesson;
         currentCategoryId = 0;
-        const response = await fetch(`/lessons`);
+        const response = await fetch(`${baseURL}/lessons`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
-            lesson.innerHTML = `<p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
+            lesson.innerHTML = 
+            `<div id="lesson-category">
+                    <p id="category-icon">${randomLesson.category_emoji}</p>
+            </div>
+            <p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
             <h2>"${randomLesson.lesson}"</h2>
             
             <div class="voting-wrapper">
@@ -50,6 +55,7 @@ const getRandomLessons = async (category) => {
             getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
             arrowFunctionality();
+            styleLessonCategory(randomLesson.category_id);
         } else {
             console.log('Response was not okay')
         }
@@ -65,10 +71,15 @@ const clickPreviousLesson = async () => {
     try {
         let data;
         if (lessonMemory.length > 1) {
-            const response = await fetch(`/lessons/${lessonMemory[lessonMemory.length - 2]}`);
+            const response = await fetch(`${baseURL}/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
-                lesson.innerHTML = `<p class="author">Lesson learned by <span>${data[0].author}</span></p>
+                console.log(data);
+                lesson.innerHTML = 
+                `<div id="lesson-category">
+                    <p id="category-icon">${data[0].category_emoji}</p>
+                </div>
+                <p class="author">Lesson learned by <span>${data[0].author}</span></p>
                 <h2>"${data[0].lesson}"</h2>
                 
                 <div class="voting-wrapper">
@@ -126,7 +137,7 @@ const clickNextLesson = async () => {
 const upvote = async (lesson_id) => {
     
     try {
-        const getResponse = await fetch(`/lessons/${lesson_id}`);
+        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -136,7 +147,7 @@ const upvote = async (lesson_id) => {
                 return getData[0].id == value;
             })
             if (!liked && !disliked) {
-                const putResponse = await fetch(`/lessons/upvote/${lesson_id}`, {
+                const putResponse = await fetch(`${baseURL}/lessons/upvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -157,7 +168,7 @@ const upvote = async (lesson_id) => {
 const downvote = async (lesson_id) => {
 
     try {
-        const getResponse = await fetch(`/lessons/${lesson_id}`);
+        const getResponse = await fetch(`${baseURL}/lessons/${lesson_id}`);
         if (getResponse.ok) {
             const getData = await getResponse.json();
             let liked = upvoteMemory.some((value) => {
@@ -166,8 +177,8 @@ const downvote = async (lesson_id) => {
             let disliked = downvoteMemory.some((value) => {
                 return getData[0].id == value;
             })
-            if (!disliked & !liked) {
-                const putResponse = await fetch(`/lessons/downvote/${lesson_id}`, {
+            if (!disliked && !liked) {
+                const putResponse = await fetch(`${baseURL}/lessons/downvote/${lesson_id}`, {
                         method: "PUT"
                     });
                 if (putResponse.ok) {
@@ -202,11 +213,15 @@ const openCategory = (categoryId) => {
 const getCategoryLesson = async (categoryId) => {
     try {
         let randomLesson;
-        const response = await fetch(`/lessons/category/${categoryId}`);
+        const response = await fetch(`${baseURL}/lessons/category/${categoryId}`);
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
-            lesson.innerHTML = `<p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
+            lesson.innerHTML = `
+            <div id="lesson-category">
+                    <p id="category-icon">${randomLesson.category_emoji}</p>
+            </div>
+            <p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
                 <h2>"${randomLesson.lesson}"</h2>
                 
                 <div class="voting-wrapper">
@@ -264,6 +279,32 @@ const highlightCategory = () => {
     })
     document.getElementById(`desktop-category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
     document.getElementById(`mobile-category-${currentCategoryId}`).style.backgroundColor = 'rgb(253, 224, 188)';
+}
+
+const styleLessonCategory = (lessonCategory) => {
+    switch (lessonCategory) {
+        case 1:
+            document.getElementById('lesson-category').style.backgroundColor = '#DEEEF4';
+            break;
+        case 2:
+            document.getElementById('lesson-category').style.backgroundColor = '#F4E6DE';
+            break;
+        case 3:
+            document.getElementById('lesson-category').style.backgroundColor = '#F4DEDE';
+            break;
+        case 4:
+            document.getElementById('lesson-category').style.backgroundColor = '#F4EEDE';
+            break;
+        case 5:
+            document.getElementById('lesson-category').style.backgroundColor = '#FFF3C8';
+            break;
+        case 6:
+            document.getElementById('lesson-category').style.backgroundColor = '#F4EEDE';
+            break;
+        case 7:
+            document.getElementById('lesson-category').style.backgroundColor = '#EAEAEA';
+            break;
+    }
 }
 
 const initWebApp = () => {
