@@ -11,13 +11,10 @@ const pool = new Pool({
     user: process.env.PG_USER,
     port: process.env.PG_PORT,
     password: process.env.PG_PASSWORD,
-    ssl: undefined
+    ssl: {
+        rejectUnauthorized: false //In production SSL Encryption is deactivated to access remote database
+    }
 })
 
-if (process.env.NODE_ENV === 'production') {
-    pool.ssl = {
-        rejectUnauthorized: false //In production SSL Encryption is deactivated to access remote database
-    };
-} 
 
 module.exports = pool;
