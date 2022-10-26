@@ -88,7 +88,8 @@ app.post('/lesson/create', async (req, res) => {
 
 
 
-console.log(pool);
+
+
 
 
 
