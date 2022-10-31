@@ -33,6 +33,7 @@
     position: relative;
     overflow-wrap: break-word;
     border-radius: 6px;
+    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.03);
 }
 
 .author {
@@ -69,8 +70,8 @@
 }
 
 .createLessonButton {
-    height: 45px; /*Check if necessary*/
-    font-size: 13px; /*Check if necessary*/
+    height: 50px; 
+    font-size: 13px;
     border-radius: 5px;
     position: absolute;
     bottom: -100px;
@@ -98,7 +99,6 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #F4E6DE;
     border-radius: 3px;
     display: flex;
     justify-content: center;

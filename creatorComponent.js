@@ -1,36 +1,53 @@
 
+const updateLessonPreview = () => {
+    let userValue = usernameInput.value;
+    let lessonValue = lessonInput.value;
+    let categoryEmoji;
+    if (dropdownContainer.selectedIndex > 0) {
+        document.getElementById('lesson-category').style.display = 'flex';
+        categoryEmoji = dropdownContainer.options[dropdownContainer.selectedIndex].innerText.slice(0,3);
+        styleLessonCategory(dropdownContainer.selectedIndex);
+    } else {
+        document.getElementById('lesson-category').style.display = 'none';
+    }
+    if (!userValue) {
+        userValue = 'Username';
+    }
+    showPreviewLesson(userValue, lessonValue, categoryEmoji)
+}
 
 
 usernameInput.addEventListener('input', () => {
-    let userValue = usernameInput.value;
-    let lessonValue = lessonInput.value;
-    if (!userValue) {
-        userValue = 'Username';
-    }
-    showPreviewLesson(userValue, lessonValue)
+    updateLessonPreview();
 })
 
 lessonInput.addEventListener('input', () => {
-    let userValue = usernameInput.value;
-    let lessonValue = lessonInput.value;
-    if (!userValue) {
-        userValue = 'Username';
-    }
-    showPreviewLesson(userValue, lessonValue);
-    showCharCount(lessonValue);
+    updateLessonPreview();
+    showCharCount(lessonInput.value);
+})
+
+dropdownContainer.addEventListener('input', () => {
+    updateLessonPreview();
 })
 
 
 
-const showPreviewLesson = (userValue = 'Username', lessonValue = '') => {
+const showPreviewLesson = (userValue = 'Username', lessonValue = '', emojiValue = '') => {
+    console.log(userValue, lessonValue, emojiValue)
     lesson.innerHTML = `
+    <div id="lesson-category">
+        <p id="category-icon">${emojiValue}</p>
+    </div>
     <p class="author">Lesson learned by <span>${userValue}</span></p>
     <h2>${lessonValue}</h2>
     <div class="voting-wrapper">
         <button id="upvoteBtn">👍🏼 <span> 0</span></button>
         <button id="downvoteBtn">👎🏼 <span> 0</span></button>
     </div>`
-   
+    if (!emojiValue) {
+        document.getElementById('lesson-category').style.display = 'none';
+    }
+    styleLessonCategory(dropdownContainer.selectedIndex);
 }
 
 const openCreatorComponent = () => {

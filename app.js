@@ -90,6 +90,7 @@ const clickPreviousLesson = async () => {
             getVotingBtnColors(data[0].id);
             lessonMemory.pop();
             arrowFunctionality();
+            styleLessonCategory(data[0].category_id);
         }  
     } catch (err) { 
         console.log(err);  
@@ -230,8 +231,9 @@ const getCategoryLesson = async (categoryId) => {
                 </div>`
             }
         getVotingBtnColors(randomLesson.id);
-        lessonMemory.push(randomLesson.id)
+        lessonMemory.push(randomLesson.id);
         arrowFunctionality();
+        styleLessonCategory(categoryId);
     } catch (err) {
         console.log(err);
     }
