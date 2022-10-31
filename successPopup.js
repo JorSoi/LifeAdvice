@@ -10,3 +10,6 @@ const hideSuccessMessage = () => {
     successPopup.style.opacity = '0%';
 }
 
+if (window.innerWidth < 425) {
+    successMessageLengthener.innerHTML = '';
+}

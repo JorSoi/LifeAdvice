@@ -67,14 +67,12 @@ const getRandomLessons = async (category) => {
 
 
 const clickPreviousLesson = async () => {
-    console.log(lessonMemory[lessonMemory.length - 2])
     try {
         let data;
         if (lessonMemory.length > 1) {
             const response = await fetch(`${baseURL}/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
-                console.log(data);
                 lesson.innerHTML = 
                 `<div id="lesson-category">
                     <p id="category-icon">${data[0].category_emoji}</p>

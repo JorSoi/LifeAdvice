@@ -16,13 +16,12 @@
 }
 
 #successMessage {
-    max-width: 400px;
     margin: 0 2%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #47CD64;
-    padding: 13px 20px;
+    padding: 13px 10px;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -36,6 +35,7 @@
     padding: 8px 15px;
     border-radius: 5px;
     margin-left: 5px;
+    white-space: nowrap;
 }
 
 

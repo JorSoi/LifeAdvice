@@ -6,6 +6,7 @@ const downvoteBtn = document.getElementById('downvoteBtn');
 const leftArrows = document.querySelectorAll('.left-arrow');
 const rightArrows = document.querySelectorAll('.right-arrow');
 const dropdownContainer = document.getElementById('dropdownContainer');
+const createLessonButtons = document.querySelectorAll('.createLessonButton');
 
 
 
@@ -22,3 +23,4 @@ const textCountLimit = document.getElementById('textCountLimit');
 //For successPopup
 const successPopup = document.getElementById('successMessageWrapper');
 const successPopupCategory = document.getElementById('success-popup-category');
+const successMessageLengthener = document.getElementById('successMessageLengthener');

@@ -44,7 +44,6 @@ app.get('/lessons', async (req, res) => {
 
 app.get('/lessons/:lesson_id', async (req, res) => {
     const db_res = await pool.query("SELECT lessons.*, categories.category_emoji FROM lessons JOIN categories ON lessons.category_id = categories.id WHERE lessons.id = $1;", [req.params.lesson_id]);
-    console.log(db_res.rows);
     res.status(200).send(db_res.rows); 
 })
 
@@ -70,7 +69,6 @@ app.get('/lessons/category/:categoryId', async (req, res) => {
 
 
 app.post('/lesson/create', async (req, res) => {
-        console.log(req.body)
     try {
         await pool.query("INSERT INTO lessons VALUES(DEFAULT, $1, $2, $3, 0, 0)", [req.body.category_id, req.body.lesson, req.body.author], (error, result) => {
             if(!error) {

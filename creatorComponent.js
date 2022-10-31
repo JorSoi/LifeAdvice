@@ -33,7 +33,6 @@ dropdownContainer.addEventListener('input', () => {
 
 
 const showPreviewLesson = (userValue = 'Username', lessonValue = '', emojiValue = '') => {
-    console.log(userValue, lessonValue, emojiValue)
     lesson.innerHTML = `
     <div id="lesson-category">
         <p id="category-icon">${emojiValue}</p>
@@ -111,6 +110,11 @@ const deacivateLessonInteraction = () => {
         item.style.opacity = '20%';
         item.style.cursor = 'auto';
     })
+    createLessonButtons.forEach((item) => {
+        item.style.pointerEvents = 'none';
+        item.style.opacity = '20%';
+        item.style.cursor = 'auto';
+    })
     
 }
 
@@ -120,6 +124,11 @@ const activateArrowInteraction = () => {
     })
     rightArrows.forEach((item) => {
         item.style.pointerEvents = 'unset';
+        item.style.cursor = 'pointer';
+    })
+    createLessonButtons.forEach((item) => {
+        item.style.pointerEvents = 'unset';
+        item.style.opacity = '100%';
         item.style.cursor = 'pointer';
     })
 }
