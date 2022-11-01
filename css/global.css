@@ -10,8 +10,6 @@ body {
     position: relative;
     overflow: hidden;
     font-size: 16px;
-    width: 100%; /* check if problem is resolved */
-    height: 100%;/* check if problem is resolved */
 }
 
 
@@ -25,6 +23,7 @@ body {
     align-items: center;
     transition-property: min-width;
     transition-duration: 500ms;
+    background-color: white;
 }
 
 #contentBody {
@@ -108,6 +107,7 @@ body {
 @media (max-width: 425px) {
     #sidebar {
         position: fixed;
+        top: 0px;
         z-index: 1000;
         background-color: white;
         width: 100%;
