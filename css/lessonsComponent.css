@@ -39,10 +39,18 @@
 .author {
     margin-bottom: 10px;
     font-size: 14px;
+    font-family: 'Inter';
+    color: #8D8D8D;
 }
+
 
 .lesson span {
     color: grey;
+    font-family: 'Inter';
+}
+
+.lesson .author span {
+    color:#D89433;
 }
 
 .voting-wrapper {
