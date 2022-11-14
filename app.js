@@ -307,11 +307,28 @@ const styleLessonCategory = (lessonCategory) => {
     }
 }
 
+const requestSessionData = async () => {
+    try {
+        const response = await fetch(`${baseURL}/session`);
+        if (response.ok) {
+            const data = await response.json();
+            if (data.upvoteMemory) {
+                upvoteMemory = data.upvoteMemory;
+            }
+            if (data.downvoteMemory) {
+                downvoteMemory = data.downvoteMemory;
+            }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const initWebApp = () => {
+    requestSessionData();
     getAllCategories();
     getRandomLessons();
     highlightCategory();
 }
 
 initWebApp();
-
