@@ -1,4 +1,4 @@
-const baseURL = '';
+const baseURL = 'http://localhost:3000';
 
 let upvoteMemory = [];
 let downvoteMemory = [];
@@ -327,7 +327,7 @@ const requestSessionData = async () => {
 const initWebApp = () => {
     requestSessionData();
     getAllCategories();
-    getRandomLessons();
+    // getRandomLessons();
     highlightCategory();
 }
 

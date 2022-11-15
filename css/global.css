@@ -2,8 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'EB Garamond', 'Times New Roman';
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 body {
@@ -11,6 +10,7 @@ body {
     position: relative;
     overflow: hidden;
     font-size: 16px;
+    font-family: 'EB Garamond', 'Times New Roman';
 }
 
 button {

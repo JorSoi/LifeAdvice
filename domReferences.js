@@ -24,3 +24,8 @@ const textCountLimit = document.getElementById('textCountLimit');
 const successPopup = document.getElementById('successMessageWrapper');
 const successPopupCategory = document.getElementById('success-popup-category');
 const successMessageLengthener = document.getElementById('successMessageLengthener');
+
+//For lessonOverlay
+const lessonOverlay = document.getElementById('lesson-overlay');
+const overlayMenu = document.getElementById('overlay-menu-container');
+const smContainer = document.getElementById('sm-container');
