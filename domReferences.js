@@ -21,7 +21,11 @@ const contentBody = document.getElementById('contentBody');
 const textCountLimit = document.getElementById('textCountLimit');
 
 //For successPopup
-const successPopup = document.getElementById('successMessageWrapper');
+const notificationsComponent = document.getElementById('notificationsComponent');
+const submitMsgWrapper = document.getElementById('submit-msg-wrapper');
+const clipboardMsgWrapper = document.getElementById('clipboard-msg-wrapper');
+const reportMsgWrapper = document.getElementById('report-msg-wrapper');
+const errorMsgWrapper = document.getElementById('error-msg-wrapper');
 const successPopupCategory = document.getElementById('success-popup-category');
 const successMessageLengthener = document.getElementById('successMessageLengthener');
 

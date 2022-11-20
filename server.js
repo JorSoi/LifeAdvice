@@ -109,6 +109,24 @@ app.post('/lesson/create', async (req, res) => {
     }
 })
 
+app.put('/lessons/report/:lesson_id', async (req, res) => {
+    try {
+        await pool.query("UPDATE lessons SET reports = reports + 1 WHERE id = $1", [req.params.lesson_id], (error, result) => {
+            if(!error) {
+                res.sendStatus(201);
+            } else {
+                res.sendStatus(400);
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    
+})
+
+
+
+
 app.get('/session', (req, res) => {
     if(req.session) {
         res.send(req.session);

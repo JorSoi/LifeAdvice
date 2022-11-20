@@ -1,4 +1,4 @@
-#successMessageWrapper {
+#notificationsComponent {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -8,26 +8,44 @@
     font-family: 'Inter', 'Times New Roman', Times, serif;
     font-size: 14px;
     color: white;
-    opacity: 0%;
+    opacity: 100%;
     transition-property: bottom, opacity;
     transition-duration: 500ms;
     transition-delay: 300ms;
     transition-timing-function: ease-in-out;
 }
 
-#successMessage {
+#submit-msg-wrapper,
+#clipboard-msg-wrapper,
+#report-msg-wrapper,
+#error-msg-wrapper {
     margin: 0 2%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-    background-color: #47CD64;
-    padding: 13px 10px;
+    padding: 11px;
     border-radius: 8px;
     cursor: pointer;
 }
 
-#successMessage p {
+#submit-msg-wrapper,
+#clipboard-msg-wrapper,
+#report-msg-wrapper {
+    background-color: #47CD64;
+}
+
+#error-msg-wrapper {
+    background-color: #D12929;
+}
+
+#submit-msg-wrapper p {
     margin-left: 10px;
+}
+
+#clipboard-msg-wrapper p,
+#report-msg-wrapper p,
+#error-msg-wrapper p {
+    margin-left: 2px;
 }
 
 #success-popup-category {

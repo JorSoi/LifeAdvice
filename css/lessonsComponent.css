@@ -24,7 +24,7 @@
 .lesson {
     background-color: white;
     max-width: 500px;
-    min-width: 300px;
+    min-width: 350px;
     min-height: auto;
     text-align: center;
     padding: 40px;
@@ -135,8 +135,8 @@
 }
 
 .dot {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
     background-color: #8D8D8D;
     border-radius: 100px;
 }

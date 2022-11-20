@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000';
+const baseURL = '';
 
 let upvoteMemory = [];
 let downvoteMemory = [];
@@ -41,17 +41,7 @@ const getRandomLessons = async (category) => {
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
-            lesson.innerHTML = 
-            `<div id="lesson-category">
-                    <p id="category-icon">${randomLesson.category_emoji}</p>
-            </div>
-            <p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
-            <h2>"${randomLesson.lesson}"</h2>
-            
-            <div class="voting-wrapper">
-                <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 <span> ${randomLesson.upvotes}</span></button>
-                <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 <span> ${randomLesson.downvotes}</span></button>
-            </div>`
+            lesson.innerHTML = populateHTMLlesson(randomLesson.category_emoji, randomLesson.author, randomLesson.lesson, randomLesson.upvotes, randomLesson.downvotes, randomLesson.id);
             getVotingBtnColors(randomLesson.id);
             lessonMemory.push(randomLesson.id);
             arrowFunctionality();
@@ -61,6 +51,7 @@ const getRandomLessons = async (category) => {
         }
     } catch (err) {
         console.log(`Code Error: ${err}`);
+        showErrorNotification();
     }
 }
 
@@ -73,17 +64,7 @@ const clickPreviousLesson = async () => {
             const response = await fetch(`${baseURL}/lessons/${lessonMemory[lessonMemory.length - 2]}`);
             if (response.ok) {
                 data = await response.json();
-                lesson.innerHTML = 
-                `<div id="lesson-category">
-                    <p id="category-icon">${data[0].category_emoji}</p>
-                </div>
-                <p class="author">Lesson learned by <span>${data[0].author}</span></p>
-                <h2>"${data[0].lesson}"</h2>
-                
-                <div class="voting-wrapper">
-                    <button id="upvoteBtn" onclick="upvote(${data[0].id})">👍🏼 <span> ${data[0].upvotes}</span></button>
-                    <button id="downvoteBtn" onclick="downvote(${data[0].id})">👎🏼 <span> ${data[0].downvotes}</span></button>
-                </div>` 
+                lesson.innerHTML = populateHTMLlesson(data[0].category_emoji, data[0].author, data[0].lesson, data[0].upvotes, data[0].downvotes, data[0].id);
             }
             getVotingBtnColors(data[0].id);
             lessonMemory.pop();
@@ -216,17 +197,7 @@ const getCategoryLesson = async (categoryId) => {
         if (response.ok) {
             const data = await response.json();
             randomLesson = getRandLesson(data);
-            lesson.innerHTML = `
-            <div id="lesson-category">
-                    <p id="category-icon">${randomLesson.category_emoji}</p>
-            </div>
-            <p class="author">Lesson learned by <span>${randomLesson.author}</span></p>
-                <h2>"${randomLesson.lesson}"</h2>
-                
-                <div class="voting-wrapper">
-                    <button id="upvoteBtn" onclick="upvote(${randomLesson.id})">👍🏼 <span> ${randomLesson.upvotes}</span></button>
-                    <button id="downvoteBtn" onclick="downvote(${randomLesson.id})">👎🏼 <span> ${randomLesson.downvotes}</span></button>
-                </div>`
+            lesson.innerHTML = populateHTMLlesson(randomLesson.category_emoji, randomLesson.author, randomLesson.lesson, randomLesson.upvotes, randomLesson.downvotes, randomLesson.id);
             }
         getVotingBtnColors(randomLesson.id);
         lessonMemory.push(randomLesson.id);
@@ -236,7 +207,26 @@ const getCategoryLesson = async (categoryId) => {
         console.log(err);
     }
 }
+
+
+const reportLesson = async (lesson_id) => {
+    try {
+        const response = await fetch(`${baseURL}/lessons/report/${lesson_id}`, {
+            method: "put"
+        })
+        if (response.status = 201) {
+            showReportNotification();
+            console.log('successfully reported')
+        } else {
+            showErrorNotification();
+            console.log('not successfully reported')
+        }
         
+    } catch (err) {
+        showErrorNotification();
+        console.log(err);
+    }
+}
 
 
 
@@ -327,7 +317,7 @@ const requestSessionData = async () => {
 const initWebApp = () => {
     requestSessionData();
     getAllCategories();
-    // getRandomLessons();
+    getRandomLessons();
     highlightCategory();
 }
 

@@ -18,10 +18,11 @@
     <meta name="description" content="You quit a bad habit? Tried something totally new? Struggled with an inner conflict? You learned something others haven't but should know? No matter how you learned it, people wanna hear it from YOU! Share your unique life lessons or advices with the community so that you wont remain the only one who has learned it! Learn from the lessons other's have already made before you to not do the same mistakes. Dont have to repeat mistakes if you can get the learning here.">
     <!-- Component Scripts -->
     <script src="/domReferences.js" defer></script>
+    <script src="/dynamicHTML.js" defer></script>
     <script src="/app.js" defer></script>
     <script src="/mobileNav.js" defer></script>
     <script src="/creatorComponent.js" defer></script>
-    <script src="/successPopup.js" defer></script>
+    <script src="/notificationsComponent.js" defer></script>
     <script src="/overlayComponent.js" defer></script>
     <!-- Component Style Sheets -->
     <link href="/css/global.css" rel="stylesheet" type="text/css"/>
@@ -29,7 +30,7 @@
     <link href="/css/lessonsComponent.css" rel="stylesheet" type="text/css"/>
     <link href="/css/creatorComponent.css" rel="stylesheet" type="text/css"/>
     <link href="/css/mobileNav.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/successPopup.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/notificationsComponent.css" rel="stylesheet" type="text/css"/>
     <link href="/css/overlayComponent.css" rel="stylesheet" type="text/css"/>
 
     <!-- Font Imports -->
@@ -41,12 +42,25 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="successMessageWrapper" onclick="hideSuccessMessage()">
-        <div id="successMessage">
+    <div id="notificationsComponent">
+        <div id="submit-msg-wrapper" onclick="hideNotificationComponent()">
             <img src="assets/checkmark.svg" alt="checkmark"/>
             <p>Lesson <span id="successMessageLengthener">successfully</span> posted to: <span id="success-popup-category">🧠 Mindset</span></p>
         </div>
+        <div id="clipboard-msg-wrapper" onclick="hideNotificationComponent()">
+            <img src="assets/checkmark.svg" alt="checkmark"/>
+            <p>Copied to clipboard!</p>
+        </div>
+        <div id="report-msg-wrapper" onclick="hideNotificationComponent()">
+            <img src="assets/checkmark.svg" alt="checkmark"/>
+            <p>Lesson successfully reported!</p>
+        </div>
+        <div id="error-msg-wrapper" onclick="hideNotificationComponent()">
+            <img src="assets/checkmark.svg" alt="checkmark"/>
+            <p>🥲 Ouups... Something went wrong!</p>
+        </div>
     </div>
+    
     <div id="hamburgerMenu" onclick="toggleNav()">
         <div></div>
         <div></div>
@@ -101,82 +115,9 @@
         <div class="lessonsComponent">
             <img class="left-arrow desktop" onclick="clickPreviousLesson()" src="assets/arrow.svg"/>
             <div class="lesson">
-                <div id="lesson-category">
-                    <p id="category-icon">🧠</p>
-                </div>
-                <p class="author">Lesson learned by <span>jorsoi_13</span></p>
-                <h2>
-                    The hardest and most important thing I ever did 
-                </h2>
-                <div class="voting-wrapper">
-                    <button id="upvoteBtn" onclick="upvote()">👍🏼 <span>0</span></button>
-                    <button id="downvoteBtn" onclick="downvote()">👎🏼 <span>0</span></button>
-                </div>
-                <div id="lesson-overlay" onclick="closeOverlay()">
 
-                    <div id="overlay-menu-container">
-                        <div id="share-button" onclick="openShareOptions()">
-                            <button><img src="assets/share-icon.svg"></button>
-                            <p>Share it!</p>
-                        </div>
-                        <div id="report-button">
-                            <button><img src="assets/report-icon.svg"></button>
-                            <p>Report</p>
-                        </div>
-                    </div>
-
-                    <div id="sm-container">
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper twitter">
-                                <img src="assets/twitter-icon.svg">
-                            </div>
-                            <p>Twitter</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper facebook">
-                                <img src="assets/facebook-icon.svg">
-                            </div>
-                            <p>Facebook</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper reddit">
-                                <img src="assets/reddit-icon.svg">
-                            </div>
-                            <p>Reddit</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper telegram">
-                                <img src="assets/telegram-icon.svg">
-                            </div>
-                            <p>Telegram</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper whatsapp">
-                                <img src="assets/whatsapp-icon.svg">
-                            </div>
-                            <p>WhatsApp</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper messenger">
-                                <img src="assets/messenger-icon.svg">
-                            </div>
-                            <p>Messenger</p>
-                        </div>
-                        <div class="sm-share-wrapper">
-                            <div class="sm-icon-wrapper copy-link">
-                                <img src="assets/copy-link-icon.svg">
-                            </div>
-                            <p>Copy Link</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="overlay-btn" onclick="openOverlay()">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
                 <!-- Displaying lesson fetched from db  -->
+                
             </div>
             <img class="right-arrow desktop" onclick="clickNextLesson()" src="assets/arrow.svg"/>
             <button class="createLessonButton desktop" onclick="openCreatorComponent()">Add your own life lesson!</button>

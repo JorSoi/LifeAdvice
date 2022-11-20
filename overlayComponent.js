@@ -1,42 +1,39 @@
-isOpen = true;
+let areOpen;
 
 
 
 const openOverlay = () => {
-    lessonOverlay.style.display = 'flex';
-    overlayMenu.style.display = 'flex';
+    document.getElementById('lesson-overlay').style.display = 'flex';
+    document.getElementById('overlay-menu-container').style.display = 'flex';
 }
 
 const closeOverlay = () => {
-    lessonOverlay.style.display = 'none';
-    smContainer.style.display = 'none';
-}
-
-const openShareOptions = () => {
-    overlayMenu.style.display = 'none';
-    smContainer.style.display = 'grid';
-    event.stopPropagation();
+    areOpen = false;
+    document.getElementById('lesson-overlay').style.display = 'none';
+    document.getElementById('sm-container').style.display = 'none';
     adjustLessonHeight();
 }
 
+const openShareOptions = () => {
+    areOpen = true;
+    document.getElementById('overlay-menu-container').style.display = 'none';
+    document.getElementById('sm-container').style.display = 'grid';
+    adjustLessonHeight();
+    event.stopPropagation();
+}
 
-
-
-
-
-
-
-
-
-
-
+const addToClipboard = async () => {
+    await navigator.clipboard.writeText('http://lifeadvice.herokuapp.com')
+    showClipboardNotification();
+}
 
 
 
 const adjustLessonHeight = () => {
-    if (isOpen) {
-        lesson.style.minHeight = `${smContainer.offsetHeight + 40}px`;
-        
+    if (areOpen) {
+        document.querySelector('.lesson').style.minHeight = `${document.getElementById('sm-container').offsetHeight + 60}px`;
+    } else {
+        document.querySelector('.lesson').style.minHeight = 'unset';
     }
 }
 

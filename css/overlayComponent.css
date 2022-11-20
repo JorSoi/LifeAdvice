@@ -46,8 +46,7 @@
 
 /* Sharing options subcomponent */
 #sm-container {
-    max-width: 90%;
-    min-width: 300px;
+    width: 302px;
     height: 330;
     display: none;
     grid-template-columns: repeat(auto-fill, 100px);
@@ -111,10 +110,8 @@
 @media (max-width: 425px) {
     
     #sm-container {
-        width: 90%;
-        min-width: unset;
+        width: 272px;
         grid-template-columns: repeat(auto-fill, 90px);
         row-gap: 20px;
-        justify-content: stretch;
     }
 }

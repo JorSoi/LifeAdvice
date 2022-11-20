@@ -42,6 +42,11 @@ const showPreviewLesson = (userValue = 'Username', lessonValue = '', emojiValue 
     <div class="voting-wrapper">
         <button id="upvoteBtn">👍🏼 <span> 0</span></button>
         <button id="downvoteBtn">👎🏼 <span> 0</span></button>
+    </div>
+    <div id="overlay-btn">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
     </div>`
     if (!emojiValue) {
         document.getElementById('lesson-category').style.display = 'none';
@@ -154,4 +159,5 @@ const cleanUpForm = () => {
     lessonInput.value = '';
     dropdownContainer.value = '';
     showCharCount(lessonInput.value)
+    document.querySelector('.lesson').style.minHeight = 'unset';
 }
