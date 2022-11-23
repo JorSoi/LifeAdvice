@@ -1,8 +1,7 @@
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY,
   category_name varchar(50) NOT NULL,
-  category_emoji	varchar(4)	4
-
+  category_emoji	varchar(5)
   );
 
 CREATE TABLE lessons (
@@ -11,7 +10,9 @@ CREATE TABLE lessons (
   lesson varchar(250) NOT NULL,
   author varchar(20),
   upvotes integer,
-  downvotes integer
+  downvotes integer,
+  reports integer,
+  creation_date timestamp
   );
   
 INSERT INTO categories VALUES (DEFAULT, 'Friendship', '🫂' ), (DEFAULT, 'Mindset', '🧠'), (DEFAULT, 'Love', '💌'), (DEFAULT, 'Business', '💼'), (DEFAULT, 'Sports', '🏅'), (DEFAULT, 'Education', '🎓'), (DEFAULT, 'Other Lessons', '💭');
