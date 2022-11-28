@@ -14,6 +14,17 @@ CREATE TABLE lessons (
   reports integer,
   creation_date timestamp
   );
+
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+  "sess" json NOT NULL,
+  "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
   
 INSERT INTO categories VALUES (DEFAULT, 'Friendship', '🫂' ), (DEFAULT, 'Mindset', '🧠'), (DEFAULT, 'Love', '💌'), (DEFAULT, 'Business', '💼'), (DEFAULT, 'Sports', '🏅'), (DEFAULT, 'Education', '🎓'), (DEFAULT, 'Other Lessons', '💭');
 
