@@ -75,7 +75,7 @@ const openCreatorComponent = () => {
 
 const submitLesson = () => {
     if(usernameInput.value.length >= usernameInput.minLength && lessonInput.value.length >= lessonInput.minLength && dropdownContainer.value) { 
-        showSuccessMessage(); //invoke before closeCreatorComponent otherwise no value will be found!
+        showSubmitMessage(); //invoke before closeCreatorComponent otherwise no value will be found!
         closeCreatorComponent();
        
     }

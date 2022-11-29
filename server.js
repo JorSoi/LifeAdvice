@@ -95,7 +95,7 @@ app.get('/lessons/category/:categoryId', async (req, res) => {
 
 app.post('/lesson/create', async (req, res) => {
     try {
-        await pool.query("INSERT INTO lessons VALUES(DEFAULT, $1, $2, $3, 0, 0, NOW())", [req.body.category_id, req.body.lesson, req.body.author], (error, result) => {
+        await pool.query("INSERT INTO lessons VALUES(DEFAULT, $1, $2, $3, 0, 0, 0, NOW())", [req.body.category_id, req.body.lesson, req.body.author], (error, result) => {
             if(!error) {
                 res.sendStatus(201);
             } else {

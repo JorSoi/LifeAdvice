@@ -11,9 +11,9 @@ const pool = new Pool({
     user: process.env.PG_USER,
     port: process.env.PG_PORT,
     password: process.env.PG_PASSWORD,
-    ssl: {
-        rejectUnauthorized: false //In production SSL Encryption is deactivated to access remote database
-    }
+    // ssl: {
+    //     rejectUnauthorized: false //In production SSL Encryption is deactivated to access remote database
+    // }
 })
 
 
