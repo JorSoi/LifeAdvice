@@ -78,6 +78,7 @@ button {
     position: absolute;
     bottom: 10px;
     left: 3%;
+    font-family: 'Inter';
     font-size: 12px;
 }
 

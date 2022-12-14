@@ -27,8 +27,23 @@ const getAllCategories = async () => {
 
 //Get Random Lesson Object out of the fetched lessons array
 const getRandLesson = (dataArray) => {
-    let randomValue = Math.floor(Math.random()* (dataArray.length));
-    return dataArray[randomValue]
+    function getRandomIndex(dataArray) {
+        return Math.floor(Math.random() * (dataArray.length));
+    }
+    let randomIndex = getRandomIndex(dataArray);
+    console.log(lessonMemory);
+    let previousLessonId = lessonMemory[lessonMemory.length - 1];
+    let randomLessonId = dataArray[randomIndex].id;
+    console.log(`randomlessonid: ${randomLessonId}`);
+    console.log(`previousLessonId: ${previousLessonId}`)
+    while(previousLessonId == randomLessonId) {
+        console.log(`Duplication detected! Random Lesson Id: ${randomLessonId}, Previous lesson id: ${previousLessonId}`);
+        randomIndex = getRandomIndex(dataArray);
+        randomLessonId = dataArray[randomIndex].id;
+        console.log(`Changed id to ${randomLessonId}`);
+    }
+    return dataArray[randomIndex]
+    
 }
 
 
