@@ -43,7 +43,7 @@ button {
     position: relative;
 }
 
-#hamburgerMenu {
+#hamburgerMenu { 
     display: none;
     width: 45px;
     height: 45px; 
