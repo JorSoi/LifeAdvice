@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 
-
+console.log(process.env.NODE_ENV, process.env.PG_PASSWORD, process.env.PG_USER)
 
  
 //Middleware
