@@ -23,31 +23,31 @@ const populateHTMLlesson = (categoryEmoji, author, lesson, upvotes, downvotes, l
         </div>
 
         <div id="sm-container">
-            <div class="sm-share-wrapper" onclick="window.open('http://twitter.com/share?text=${lesson}&url=https://lifeadvice.herokuapp.com&hashtags=lifeadvice,personalLesson,learning','mywindow')">
+            <div class="sm-share-wrapper" onclick="window.open('http://twitter.com/share?text=${lesson}&url=https://lifeadvice.app&hashtags=lifeadvice,personalLesson,learning','mywindow')">
                 <div class="sm-icon-wrapper twitter">
                     <img src="assets/twitter-icon.svg">
                 </div>
                 <p>Twitter</p>
             </div>
-            <div class="sm-share-wrapper" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flifeadvice.herokuapp.com%2F&amp%3Bsrc=sdkpreparse')">
+            <div class="sm-share-wrapper" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://lifeadvice.app%2F&amp%3Bsrc=sdkpreparse')">
                 <div class="sm-icon-wrapper facebook">
                     <img src="assets/facebook-icon.svg">
                 </div>
                 <p>Facebook</p>
             </div>
-            <div class="sm-share-wrapper" onclick="window.open('https://reddit.com/submit?url=https://lifeadvice.herokuapp.com&title=Here are some life lessons which I have learned.')">
+            <div class="sm-share-wrapper" onclick="window.open('https://reddit.com/submit?url=https://lifeadvice.app&title=Here are some life lessons which I have learned.')">
                 <div class="sm-icon-wrapper reddit">
                     <img src="assets/reddit-icon.svg">
                 </div>
                 <p>Reddit</p>
             </div>
-            <div class="sm-share-wrapper" onclick="window.open('https://telegram.me/share/url?url=https://lifeadvice.herokuapp.com&text=Here are some life lesson which I have learned.')">
+            <div class="sm-share-wrapper" onclick="window.open('https://telegram.me/share/url?url=https://lifeadvice.app&text=Here are some life lesson which I have learned.')">
                 <div class="sm-icon-wrapper telegram">
                     <img src="assets/telegram-icon.svg">
                 </div>
                 <p>Telegram</p>
             </div>
-            <div class="sm-share-wrapper" onclick="window.open('whatsapp://send?text=Here are some life lesson which I have learned: https://lifeadvice.herokuapp.com')">
+            <div class="sm-share-wrapper" onclick="window.open('whatsapp://send?text=Here are some life lesson which I have learned: https://lifeadvice.app')">
                 <div class="sm-icon-wrapper whatsapp">
                     <img src="assets/whatsapp-icon.svg">
                 </div>

@@ -82,7 +82,7 @@ button {
     font-size: 12px;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     
     body {
         flex-flow: column;
@@ -111,7 +111,7 @@ button {
     }
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
     #sidebar {
         position: fixed;
         top: 0px;
